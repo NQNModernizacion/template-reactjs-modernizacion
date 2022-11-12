@@ -1,31 +1,14 @@
 /* APIS */
-export { getOptionsFetch, getLastSolByUser, getPersonaRenaper, getAllSolicitudes, getSolicitud, putData, getRubros, postData, getTiposDocumentos, getHistorial } from './api'
+export {
+    getOptionsFetch,
+    getTest
+} from './api'
 
 /* Funciones comunes */
-export { getParams, capitalizeFirst, formatDate, isObjEmpty, getObjModal, getAccessScreen, returnWebLogin } from './common'
-
-/* Documentos */
-export { getDocumentsState, getDocumentsOptions, handlerChangeDocumentos, hanlderEvalDoc } from './documentsState'
-
-/* Domicilio */
-export {
-    countDelimitadores,
-    existDomicilio,
-    getEmptyString,
-    domicilioNull,
-    stringToDesc,
-    fildsToString,
-    stringToObj
-} from './domicilioState'
+export { getParams, capitalizeFirst, formatDate, isObjEmpty, getAccessScreen, returnWebLogin } from './common'
 
 /* Manejo de errores */
 export { getErrorRenaper } from './errors'
-
-/* Estados */
-export { getEstado, getEstadoHistorial, getEstadoUpdate, getRetornado, getEtapa, getUbicacion } from './estadosState'
-
-/* Exportacion de información */
-export { getCsvMain } from './exportData'
 
 /* Archivos */
 export {
@@ -38,11 +21,6 @@ export {
     labelFileInput,
     downloadFile
 } from './files'
-
-export { footerInfo, FooterBtns } from './footer'
-
-/* notas */
-export { getNotasState, setNotasState } from './notasState'
 
 /* Validadores */
 export {

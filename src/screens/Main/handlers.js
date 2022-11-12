@@ -7,6 +7,8 @@ const handlerGetUserData = (state, setState) => async () => {
     const res = await fetch(URL_GET_TOKEN + sessionKey);
     const datosUsuario = await res.json();
 
+    console.log(datosUsuario);
+
     if (datosUsuario.error === null) {
         /* Buscamos la aplicacion dentro del arreglo del usuario*/
         const app = datosUsuario.apps.find(({ id }) => id === APP_ID);
@@ -35,19 +37,7 @@ const getArrayRoles = (userProfiles) => {
     return userProfiles.split(',').map((id) => {
         switch (id) {
             case '1':
-                return 'ver_inicio'
-            case '2':
-                return 'catastro'
-            case '3':
-                return 'ver_ambiental'
-            case '4':
-                return 'ver_rubros'
-            case '5':
-                return 'ver_documentos'
-            case '10':
-                return 'auditoria'
-            case '11':
-                return 'admin'
+                return 'PERMISO_1'
 
             default:
                 return 'user'
