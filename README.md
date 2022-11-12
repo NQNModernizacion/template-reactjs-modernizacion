@@ -1,2 +1,39 @@
 # template-reactjs-modernizacion
-Témplate básico de RactJS
+
+1) Cambiar la configuracion del `package.json`
+- "name": ingresar nombre del proyecto
+- "homepage": ingresar la ubicacion real del proyecto
+- "description". ingresar la descipcion del proyecto
+
+<hr/>
+
+2) Ejectuar `npm install`
+
+<hr/>
+
+3) Modificar el archivo `public/index.html`
+
+- content del meta tag con name "description":
+
+    ```html
+        <meta name="description" content="Template" />
+    ```
+- Contenido del title del proyecto
+
+    ```html
+    <title>Template</title>
+    ```
+
+<hr/>
+
+3) Modificar el archivo `public/manifest.json`
+
+    ```json
+    "short_name": "Template",
+    "name": "Template - Municipalidad de Neuquén"
+    ```
+
+<hr/>
+
+4) De ser necesario, borrar el archivo `public/web.config`
+
