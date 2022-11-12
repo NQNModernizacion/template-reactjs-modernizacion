@@ -20,7 +20,7 @@
 - content del meta tag con name "description":
 
     ```html
-        <meta name="description" content="Template" />
+    <meta name="description" content="Template" />
     ```
 - Contenido del title del proyecto
 
