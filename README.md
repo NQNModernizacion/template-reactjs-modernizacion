@@ -11,7 +11,11 @@
 
 <hr/>
 
-3) Modificar el archivo `public/index.html`
+3) Copiar el `.env` y generar `.env.development` y `.env.production`
+
+<hr/>
+
+4) Modificar el archivo `public/index.html`
 
 - content del meta tag con name "description":
 
@@ -26,7 +30,7 @@
 
 <hr/>
 
-3) Modificar el archivo `public/manifest.json`
+5) Modificar el archivo `public/manifest.json`
 
     ```json
     "short_name": "Template",
@@ -35,5 +39,5 @@
 
 <hr/>
 
-4) De ser necesario, borrar el archivo `public/web.config`
+6) De ser necesario, borrar el archivo `public/web.config`
 
