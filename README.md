@@ -1,10 +1,13 @@
 # template-reactjs-modernizacion
 
 1) Cambiar la configuracion del `package.json`
-- "name": ingresar nombre del proyecto
-- "homepage": ingresar la ubicacion real del proyecto
-- "description". ingresar la descipcion del proyecto
 
+    ```json
+    "name": "template-reactjs-modernizacion",
+    "homepage": "/apps/TEMPLATE",
+    "description": "Témplate básico de RactJS",
+    ```
+    
 <hr/>
 
 2) Ejectuar `npm install`
