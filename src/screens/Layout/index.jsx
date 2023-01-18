@@ -1,7 +1,7 @@
 import { HOME_SCREEN } from '../../config/types';
 import UserBanner from './UserBanner';
 
-const Layout = ({ state, children }) => {
+const Layout = ({ children }) => {
     return (
         <>
             <nav className="navbar navbar-expand-lg d-flex justify-content-between">

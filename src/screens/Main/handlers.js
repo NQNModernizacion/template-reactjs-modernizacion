@@ -1,37 +1,28 @@
 import { APP_ID, URL_GET_TOKEN } from '../../config';
 import { getParams } from '../../utils';
 
-const handlerGetUserData = (state, setState) => async () => {
+export const handlerGetUserData = (actions) => async () => {
     /* Obtenemos los datos del usuario de webLogin */
     const sessionKey = getParams().SESSIONKEY;
     const res = await fetch(URL_GET_TOKEN + sessionKey);
     const datosUsuario = await res.json();
 
-    console.log(datosUsuario);
-
     if (datosUsuario.error === null) {
-        /* Buscamos la aplicacion dentro del arreglo del usuario*/
+        /* Buscamos la aplicacion dentro del arreglo del usuario */
         const app = datosUsuario.apps.find(({ id }) => id === APP_ID);
 
-        /* Guardamos la referencia ID del usuario en los datos personales */
-        datosUsuario.datosPersonales.userId = datosUsuario.referenciaID;
-
-        setState({
-            ...state,
-            role: getArrayRoles(app.userProfiles),
-            datosPersonales: datosUsuario.datosPersonales,
-            loading: false,
+        actions.setUser({
+            datosUsuario,
+            role: app && getArrayRoles(app.userProfiles),
+            app
         });
     } else {
-        setState({
-            ...state,
-            datosPersonales: 'error',
-            loading: false,
-        });
+        actions.setError('Hubo un error al obtener los datos del usuario, vuelva a intentarlo mas tarde')
     }
 };
 
-const getArrayRoles = (userProfiles) => {
+/** Definimos el rol del usuario en funcion del perfil en wapUsuariosPerfiles */
+export const getArrayRoles = (userProfiles) => {
     if (!userProfiles) return 'user'
 
     return userProfiles.split(',').map((id) => {
@@ -45,7 +36,7 @@ const getArrayRoles = (userProfiles) => {
     })
 }
 
-const handlerBackToMenu = (state, setState) => {
+export const handlerBackToMenu = (state, setState) => {
     setState({
         ...state,
         view: {
@@ -54,4 +45,12 @@ const handlerBackToMenu = (state, setState) => {
     });
 }
 
-export { handlerGetUserData, handlerBackToMenu };
+/** Enviamos un bool para mostrar el spinner principal */
+export const showSpinner = (loading) => {
+    if (loading) {
+        window.cargarSpinner();
+        return null;
+    } else {
+        window.eliminarSpinner();
+    }
+}

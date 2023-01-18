@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { Layout } from '../';
 
 import { viewAllConfig } from '../../config';
-import { menuState } from '../../config/initialState';
-import { handlerGetUserData } from './handlers';
+import { UserContext } from '../../context';
+import { handlerGetUserData, showSpinner } from './handlers';
 
 const Main = () => {
-    const [state, setState] = useState(menuState);
+    const { actions, loading } = useContext(UserContext);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(handlerGetUserData(state, setState), []);
+    useEffect(handlerGetUserData(actions), []);
 
     /* VEMOS LA CONFIG; */
     viewAllConfig();
 
+    showSpinner(loading);
+
     return (
-        <Layout state={state} setState={setState}>
+        <Layout>
             Cargamos los componentes de los screen, aca se realiza el routing basado en estados
         </Layout>
     );
