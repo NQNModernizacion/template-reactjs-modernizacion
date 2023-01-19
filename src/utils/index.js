@@ -1,7 +1,6 @@
 /* APIS */
 export {
-    getOptionsFetch,
-    getTest
+    handlerAxios
 } from './api'
 
 /* Funciones comunes */
@@ -15,7 +14,8 @@ export {
     getArrayFiles,
     getMb,
     sliceFileName,
-    getTypeFile, prevFile,
+    getTypeFile,
+    prevFile,
     getFormatInBase64,
     getAcceptFormat,
     labelFileInput,
