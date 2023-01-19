@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Layout } from '../';
 
 import { UserContext } from '../../context';
-import { handlerAxios } from '../../utils';
+import { axios } from '../../utils/api';
 import { handlerGetUserData, showSpinner } from './handlers';
 
 const Main = () => {
@@ -23,7 +23,7 @@ const Main = () => {
             ...state,
             loading: true,
         });
-        const response = await handlerAxios('/ideaspropuestas?action=getAllContents', signal);
+        const response = await axios('/ideaspropuestas?action=getAllContents', signal);
 
         let stateTemp;
 
@@ -55,12 +55,10 @@ const Main = () => {
             ...state,
             loading: true,
         });
-        const response = await handlerAxios(
-            '/ideaspropuestas?action=getAllContents',
-            signal,
-            'POST',
-            { content: 'asdad', action: 'saveContent' }
-        );
+        const response = await axios('/ideaspropuestas?action=getAllContents', signal, 'POST', {
+            content: 'asdad',
+            action: 'saveContent',
+        });
 
         let stateTemp;
 

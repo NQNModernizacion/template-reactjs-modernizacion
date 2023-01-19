@@ -1,5 +1,5 @@
 import { APP_ID, URL_GET_TOKEN } from '../../config';
-import { getParams } from '../../utils';
+import { getParams } from '../../utils/common';
 
 export const handlerGetUserData = (actions) => async () => {
     /* Obtenemos los datos del usuario de webLogin */
