@@ -1,5 +1,5 @@
 /** Manejo de errores de renaper */
-const getErrorRenaper = (str) => {
+export const getErrorRenaper = (str) => {
     switch (str) {
         case 'No se encuentra ese número de documento':
             return str
@@ -14,5 +14,3 @@ const getErrorRenaper = (str) => {
             return 'Hubo un problema, contáctese con soporte'
     }
 }
-
-export { getErrorRenaper }
