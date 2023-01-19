@@ -38,6 +38,11 @@ const setData = async (signal, state, setState) => {
     setState(stateTemp);
 };
 
+const effect = (current, state, setState) => () => {
+    setData(current.signal, state, setState);
+    return () => current.abort();
+};
+
 const Dos = () => {
     const [state, setState] = useState({
         loading: false,
@@ -46,11 +51,8 @@ const Dos = () => {
 
     const { current } = useRef(new AbortController());
 
-    useEffect(() => {
-        setData(current.signal, state, setState);
-        return () => current.abort();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(effect(current, state, setState), []);
 
     return (
         <div>
