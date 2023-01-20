@@ -50,7 +50,6 @@ const Dos = () => {
         data: null,
     });
 
-    console.log(state);
     const { current } = useRef(new AbortController());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,24 +1,26 @@
 import { APP_ID, URL_GET_TOKEN } from '../../config';
-import { getParams } from '../../utils/common';
+import { getSessionKey, isTimeInvalid } from '../../utils/sessionStorage';
 
 export const handlerGetUserData = (actions) => async () => {
-    console.log('ESTOY');
-    /* Obtenemos los datos del usuario de webLogin */
-    const sessionKey = getParams().SESSIONKEY;
-    const res = await fetch(URL_GET_TOKEN + sessionKey);
-    const datosUsuario = await res.json();
+    if (!isTimeInvalid()) {
+        /* Obtenemos los datos del usuario de webLogin */
+        const res = await fetch(URL_GET_TOKEN + getSessionKey());
+        const datosUsuario = await res.json();
 
-    if (datosUsuario.error === null) {
-        /* Buscamos la aplicacion dentro del arreglo del usuario */
-        const app = datosUsuario.apps.find(({ id }) => id === APP_ID);
+        if (datosUsuario.error === null) {
+            /* Buscamos la aplicacion dentro del arreglo del usuario */
+            const app = datosUsuario.apps.find(({ id }) => id === APP_ID);
 
-        actions.setUser({
-            datosUsuario,
-            role: app && getArrayRoles(app.userProfiles),
-            app
-        });
+            actions.setUser({
+                datosUsuario,
+                role: app && getArrayRoles(app.userProfiles),
+                app
+            });
+        } else {
+            actions.setError('Hubo un error al obtener los datos del usuario, vuelva a intentarlo mas tarde')
+        }
     } else {
-        actions.setError('Hubo un error al obtener los datos del usuario, vuelva a intentarlo mas tarde')
+        console.log('Caduco la sesion');
     }
 };
 

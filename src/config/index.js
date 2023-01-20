@@ -1,12 +1,14 @@
 
 import { LIM_CUIT } from './charLimit'
 
-const APP_ID = parseInt(process.env.REACT_APP_APP_ID);
-const ENV = process.env.REACT_APP_ENV;
+export const APP_ID = parseInt(process.env.REACT_APP_APP_ID);
+export const ENV = process.env.REACT_APP_ENV;
 
-const BEARER_TOKEN = process.env.REACT_APP_BEARER_TOKEN;
+export const BEARER_TOKEN = process.env.REACT_APP_BEARER_TOKEN;
 
-const NO_AVAL = 'https://weblogin.muninqn.gov.ar/apps/css/assets/Imagen_no_disponible.svg';
+export const isDev = process.env.NODE_ENV === 'development'
+
+export const NO_AVAL = 'https://weblogin.muninqn.gov.ar/apps/css/assets/Imagen_no_disponible.svg';
 
 /* Configuracion del backend URL */
 let URL_BACK;
@@ -34,8 +36,8 @@ const config = {
     LIM_CUIT: LIM_CUIT,
 };
 
-const viewAllConfig = () => console.table(config)
+export const viewAllConfig = () => console.table(config)
 
-export { ENV, URL_GET_TOKEN, APP_ID, BEARER_TOKEN, URL_BACK, NO_AVAL, LIM_CUIT, viewAllConfig };
+export { URL_GET_TOKEN, URL_BACK, LIM_CUIT };
 
 /* Limite de los caracteres */

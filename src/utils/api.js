@@ -1,6 +1,6 @@
 import { default as a } from 'axios';
 import { BEARER_TOKEN, URL_BACK } from '../config';
-import { getParams } from './common';
+import { getSessionKey } from './sessionStorage';
 
 const getFormData = (data) => {
     const body = new FormData();
@@ -13,7 +13,7 @@ const getFormData = (data) => {
 export const axios = async (url, signal, method = 'GET', data) => {
     try {
         a.defaults.baseURL = URL_BACK;
-        a.defaults.headers.common['Authorization'] = 'Bearer ' + BEARER_TOKEN + '%' + getParams().SESSIONKEY;
+        a.defaults.headers.common['Authorization'] = 'Bearer ' + BEARER_TOKEN + '%' + getSessionKey();
         a.defaults.headers.post['Accept'] = 'application/json';
 
         return await a({
