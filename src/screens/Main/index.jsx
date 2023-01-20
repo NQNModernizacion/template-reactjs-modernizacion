@@ -1,4 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+
+import { HashRouter, Routes as Switch, Route, Link } from 'react-router-dom';
 
 import { Layout, Uno, Dos } from '../';
 
@@ -13,29 +15,36 @@ const Main = () => {
 
     showSpinner(loading);
 
-    /* TODO LO SIGUENTE ES DE MODO DE EJEMPLO - SE DEBE BORRAR */
-    const [state, setState] = useState('main');
-    /* FIN DE MODO DE EJEMPLO - SE DEBE BORRAR */
+    const RenderLinks = () => {
+        return (
+            <div className="d-fles">
+                <Link to="/" className="btn btn-primary me-2">
+                    Home
+                </Link>
+                <Link to="/uno" className="btn btn-primary me-2">
+                    uno
+                </Link>
+                <Link to="/uno/cuatro" className="btn btn-primary me-2">
+                    uno
+                </Link>
+                <Link to="/dos" className="btn btn-primary me-2">
+                    DOS
+                </Link>
+            </div>
+        );
+    };
 
     return (
-        <Layout>
-            {/* TODO LO SIGUENTE ES DE MODO DE EJEMPLO - SE DEBE BORRAR */}
-            <div className="d-flex">
-                <button className="btn btn-primary me-2" onClick={() => setState('uno')}>
-                    UNO
-                </button>
-                <button className="btn btn-primary me-2" onClick={() => setState('dos')}>
-                    DOS
-                </button>
-                <button className="btn btn-primary me-2" onClick={() => setState('main')}>
-                    VOLVER
-                </button>
-            </div>
-
-            {state === 'uno' && <Uno />}
-            {state === 'dos' && <Dos />}
-            {/* FIN DE MODO DE EJEMPLO - SE DEBE BORRAR */}
-        </Layout>
+        <HashRouter>
+            <Layout renderProp={() => <RenderLinks />}>
+                <Switch>
+                    <Route path="/" element={'asdasd'} />
+                    <Route path="/uno" element={<Uno />} />
+                    <Route path="/uno/cuatro" element={<Uno />} />
+                    <Route path="/dos" element={<Dos />} />
+                </Switch>
+            </Layout>
+        </HashRouter>
     );
 };
 

@@ -1,7 +1,7 @@
 import { HOME_SCREEN } from '../../config/types';
 import UserBanner from './UserBanner';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, renderProp }) => {
     return (
         <>
             <nav className="navbar navbar-expand-lg d-flex justify-content-between">
@@ -9,6 +9,8 @@ const Layout = ({ children }) => {
                 <UserBanner nombre={'NOMBRE'} />
             </nav>
             <div className="container">
+                {renderProp && renderProp()}
+
                 <div className="row pt-3 m-0">{children}</div>
             </div>
         </>

@@ -8,7 +8,8 @@ const setData = async (signal, state, setState) => {
         ...state,
         loading: true,
     });
-    const response = await axios('/ideaspropuestas?action=getAllContents', signal, 'POST', {
+
+    const response = await axios('/ideaspropuestas', signal, 'POST', {
         content: 'asdad',
         action: 'saveContent',
     });
@@ -49,6 +50,7 @@ const Dos = () => {
         data: null,
     });
 
+    console.log(state);
     const { current } = useRef(new AbortController());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

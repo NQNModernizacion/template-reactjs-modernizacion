@@ -2,6 +2,7 @@ import { APP_ID, URL_GET_TOKEN } from '../../config';
 import { getParams } from '../../utils/common';
 
 export const handlerGetUserData = (actions) => async () => {
+    console.log('ESTOY');
     /* Obtenemos los datos del usuario de webLogin */
     const sessionKey = getParams().SESSIONKEY;
     const res = await fetch(URL_GET_TOKEN + sessionKey);
