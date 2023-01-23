@@ -1,6 +1,7 @@
 import { isCancel } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { axios } from '../../utils/api';
 
 const setData = async (signal, state, setState) => {
@@ -44,7 +45,9 @@ const effect = (current, state, setState) => () => {
     return () => current.abort();
 };
 
-const Dos = () => {
+const Tres = () => {
+    let { id } = useParams();
+
     const [state, setState] = useState({
         loading: false,
         data: null,
@@ -57,7 +60,7 @@ const Dos = () => {
 
     return (
         <div>
-            DOS
+            tres
             <br />
             {state.loading && 'Loading'}
             <br />
@@ -68,4 +71,4 @@ const Dos = () => {
     );
 };
 
-export default Dos;
+export default Tres;

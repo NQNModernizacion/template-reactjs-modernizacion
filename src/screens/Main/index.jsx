@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 
-import { HashRouter, Routes as Switch, Route, Link } from 'react-router-dom';
+import { HashRouter, Routes as Switch, Route, Link, useParams } from 'react-router-dom';
 
-import { Layout, Uno, Dos } from '../';
+import { Layout, Uno, Dos, Tres } from '../';
 
 import { UserContext } from '../../context';
 import { setSession, viewSession } from '../../utils/sessionStorage';
@@ -12,6 +12,7 @@ setSession()
 
 const Main = () => {
     const { actions, loading } = useContext(UserContext);
+    let { id } = useParams();
 
     viewSession();
 
@@ -39,6 +40,8 @@ const Main = () => {
         );
     };
 
+    console.log(id);
+
     return (
         <HashRouter>
             <Layout renderProp={() => <RenderLinks />}>
@@ -47,6 +50,7 @@ const Main = () => {
                     <Route path="/uno" element={<Uno />} />
                     <Route path="/uno/cuatro" element={<Uno />} />
                     <Route path="/dos" element={<Dos />} />
+                    <Route path="/tres/:id" element={<Tres />} />
                 </Switch>
             </Layout>
         </HashRouter>
