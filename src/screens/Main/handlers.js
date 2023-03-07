@@ -1,7 +1,11 @@
 import { APP_ID, URL_GET_TOKEN } from '../../config';
+import { getParams } from '../../utils/common';
 import { getSessionKey, isTimeInvalid } from '../../utils/sessionStorage';
 
 export const handlerGetUserData = (actions) => async () => {
+
+    const token = getParams().token
+
     if (!isTimeInvalid()) {
         /* Obtenemos los datos del usuario de webLogin */
         const res = await fetch(URL_GET_TOKEN + getSessionKey());

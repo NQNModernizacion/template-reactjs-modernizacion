@@ -5,17 +5,13 @@ import { HashRouter, Routes as Switch, Route, Link, useParams } from 'react-rout
 import { Layout, Uno, Dos, Tres } from '../';
 
 import { UserContext } from '../../context';
-import { setSession, viewSession } from '../../utils/sessionStorage';
 import { handlerGetUserData, showSpinner } from './handlers';
 
-setSession()
 
 const Main = () => {
     const { actions, loading } = useContext(UserContext);
     let { id } = useParams();
-
-    viewSession();
-
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(handlerGetUserData(actions), []);
 

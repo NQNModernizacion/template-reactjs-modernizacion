@@ -1,7 +1,6 @@
 {
     "name": "template-reactjs-modernizacion",
     "version": "1.0.0",
-    "homepage": "/apps/TEMPLATE",
     "description": "Témplate básico de RactJS",
     "dependencies": {
         "@emotion/react": "^11.10.4",
@@ -25,9 +24,11 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
+        "build": "react-scripts build && dev:xcopy",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "dev:del": "rmdir /s /q C:\\laragon\\www\\template-reactjs-modernizacion\\",
+        "xcopy": "xcopy D:\\Proyectos\\template-reactjs-modernizacion\\build C:\\laragon\\www\\template-reactjs-modernizacion /E/H/C"
     },
     "eslintConfig": {
         "extends": [
