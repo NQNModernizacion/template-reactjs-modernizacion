@@ -47,6 +47,7 @@ const effect = (current, state, setState) => () => {
 
 const Tres = () => {
     let { id } = useParams();
+    console.log(id, '03');
 
     const [state, setState] = useState({
         loading: false,

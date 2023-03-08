@@ -1,17 +1,18 @@
 import { useContext, useEffect } from 'react';
 
-import { HashRouter, Routes as Switch, Route, Link, useParams } from 'react-router-dom';
+import { HashRouter, Routes as Switch, Route, Link } from 'react-router-dom';
 
 import { Layout, Uno, Dos, Tres } from '../';
 
 import { UserContext } from '../../context';
+import { initApp } from '../../utils/common';
 import { handlerGetUserData, showSpinner } from './handlers';
 
+initApp();
 
 const Main = () => {
     const { actions, loading } = useContext(UserContext);
-    let { id } = useParams();
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(handlerGetUserData(actions), []);
 
@@ -35,8 +36,6 @@ const Main = () => {
             </div>
         );
     };
-
-    console.log(id);
 
     return (
         <HashRouter>

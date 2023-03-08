@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { axios } from "../utils/api";
-import { getParams } from "../utils/common";
 
 export const UserContext = React.createContext(null);
 
@@ -13,8 +11,7 @@ export const UserWrapper = ({ children }) => {
     });
 
     useEffect(() => {
-        const params = getParams()
-        console.log(params);
+        
     }, []);
 
     const actions = {

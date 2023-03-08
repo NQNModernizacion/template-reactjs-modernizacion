@@ -1,30 +1,15 @@
-import { APP_ID, URL_GET_TOKEN } from '../../config';
-import { getParams } from '../../utils/common';
-import { getSessionKey, isTimeInvalid } from '../../utils/sessionStorage';
+import Axios, { validateStatus } from '../../utils/axios';
 
 export const handlerGetUserData = (actions) => async () => {
+    let response = await Axios.get('api/get_usuario', { validateStatus: validateStatus });
+    const { data, error } = response.data
 
-    const token = getParams().token
+    if (data) {
+        actions.setUser(data)
+    }
 
-    if (!isTimeInvalid()) {
-        /* Obtenemos los datos del usuario de webLogin */
-        const res = await fetch(URL_GET_TOKEN + getSessionKey());
-        const datosUsuario = await res.json();
-
-        if (datosUsuario.error === null) {
-            /* Buscamos la aplicacion dentro del arreglo del usuario */
-            const app = datosUsuario.apps.find(({ id }) => id === APP_ID);
-
-            actions.setUser({
-                datosUsuario,
-                role: app && getArrayRoles(app.userProfiles),
-                app
-            });
-        } else {
-            actions.setError('Hubo un error al obtener los datos del usuario, vuelva a intentarlo mas tarde')
-        }
-    } else {
-        console.log('Caduco la sesion');
+    if (error) {
+        actions.setError(error)
     }
 };
 

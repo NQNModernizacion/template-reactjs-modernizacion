@@ -1,28 +1,13 @@
 import { default as a } from 'axios';
-import { BEARER_TOKEN, URL_BACK } from '../config';
-import { getSessionKey } from './sessionStorage';
+import { URL_BACK } from '../config';
+import { getToken } from './sessionStorage';
 
-const getFormData = (data) => {
-    const body = new FormData();
-    for (let key in data) {
-        body.append(key, data[key]);
-    }
-    return body
-}
+export const axios = async () => {
 
-export const axios = async (url, signal, method = 'GET', data) => {
-    try {
-        a.defaults.baseURL = URL_BACK;
-        a.defaults.headers.common['Authorization'] = 'Bearer ' + BEARER_TOKEN + '%' + getSessionKey();
-        a.defaults.headers.post['Accept'] = 'application/json';
+    a.defaults.baseURL = URL_BACK;
+    a.defaults.headers.common['Authorization'] = 'Bearer ' + getToken();
+    a.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    /* a.defaults.headers.post['Accept'] = 'application/json'; */
 
-        return await a({
-            url,
-            method,
-            signal,
-            data: data && getFormData(data)
-        });
-    } catch (error) {
-        return error
-    }
+    return a
 }
