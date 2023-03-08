@@ -1,6 +1,7 @@
 import { ENV } from "../config";
 import { setSession } from "./sessionStorage";
 
+/** Proceso inicial para el ingreso a la app */
 export const initApp = () => {
     const token = getParams().token;
 
@@ -21,6 +22,7 @@ export const getParams = () => {
     return keys.reduce((obj, key) => ({ ...obj, [key]: searchParams.get(key) }), {});
 };
 
+/** Remueve un parametro de la URL */
 export const removeURLParameter = (url, parameter) => {
     //prefer to use l.search if you have a location/link object
     const urlparts = url.split('?');

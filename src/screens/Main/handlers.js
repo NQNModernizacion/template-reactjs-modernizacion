@@ -1,7 +1,7 @@
-import Axios, { validateStatus } from '../../utils/axios';
+import axios, { validateStatus } from '../../utils/axios';
 
 export const handlerGetUserData = (actions) => async () => {
-    let response = await Axios.get('api/get_usuario', { validateStatus: validateStatus });
+    let response = await axios.get('api/get_usuario', { validateStatus: validateStatus });
     const { data, error } = response.data
 
     if (data) {

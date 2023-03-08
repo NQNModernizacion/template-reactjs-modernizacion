@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { default as a } from 'axios';
 
 import { URL_BACK } from '../config';
 import { getParams } from './common';
@@ -6,11 +6,11 @@ import { getToken } from './sessionStorage';
 
 export const validateStatus = (status) => true;
 
-const Axios = axios;
+const axios = a;
 
-Axios.defaults.baseURL = URL_BACK;
+axios.defaults.baseURL = URL_BACK;
 const token = getToken() ? getToken() : getParams().token
-Axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-Axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
-export default Axios
+export default axios
