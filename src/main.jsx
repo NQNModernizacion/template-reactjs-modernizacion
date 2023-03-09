@@ -1,0 +1,15 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+import { Main } from "./pages";
+
+import "./assets/css/index.scss";
+import { UserWrapper } from "./context";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <UserWrapper>
+      <Main />
+    </UserWrapper>
+  </React.StrictMode>
+);

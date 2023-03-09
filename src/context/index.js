@@ -5,7 +5,6 @@ import { hasRole, hasPermission } from './utils';
 export const UserContext = React.createContext(null);
 
 export const UserWrapper = ({ children }) => {
-
     const [store, setStore] = useState({
         loading: true,
         error: null,
