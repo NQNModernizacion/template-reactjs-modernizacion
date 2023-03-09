@@ -1,11 +1,15 @@
-# template-reactjs-modernizacion
+- [Configuración inicial](#configuración-inicial)
+  - [Variables de entorno](#variables-de-entorno)
+- [Build](#build)
+- [Estilos](#estilos)
 
+# Configuración inicial
 1) Cambiar la configuracion del `package.json`
 
     ```json
     "name": "template-reactjs-modernizacion",
     "homepage": "/apps/TEMPLATE",
-    "description": "Témplate básico de RactJS",
+    "description": "Témplate básico de ReactJS",
     ```
     
 <hr/>
@@ -52,7 +56,10 @@ Se deben crear 3 archivos de variables de entorno:
 - `.env.development`
 - `.env.staging` (En este es donde se configura para el entorno de desarrollo local)
 
-## Build
+# Build
 - Local: `npm run build-local`
 - Réplica: `npm run build-dev`
 - Producción: `npm run build`
+
+# Estilos
+Por defecto los estilos son de Bootstrap 5. En caso de querer usar Tailwind CSS o alguna otra librería de estilos, comentar en el `index.html` los imports de bootstrap y agregar por paquete o cdn los que se vayan a usar
