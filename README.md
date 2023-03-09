@@ -1,5 +1,4 @@
 - [Configuración inicial](#configuración-inicial)
-  - [Variables de entorno](#variables-de-entorno)
 - [Build](#build)
 - [Estilos](#estilos)
 
@@ -18,7 +17,7 @@
 
 <hr/>
 
-3) Copiar el `.env` y generar `.env.development` y `.env.production`
+3) Copiar el `.env.example` y generar `.env.staging`, `.env.development` y `.env.production`
 
 <hr/>
 
@@ -50,16 +49,12 @@
 
 <hr />
 
-## Variables de entorno
-Se deben crear 3 archivos de variables de entorno:
-- `.env.production`
-- `.env.development`
-- `.env.staging` (En este es donde se configura para el entorno de desarrollo local)
-
 # Build
 - Local: `npm run build-local`
 - Réplica: `npm run build-dev`
 - Producción: `npm run build`
+
+<hr />
 
 # Estilos
 Por defecto los estilos son de Bootstrap 5. En caso de querer usar Tailwind CSS o alguna otra librería de estilos, comentar en el `index.html` los imports de bootstrap y agregar por paquete o cdn los que se vayan a usar
