@@ -44,3 +44,15 @@
 
 6) De ser necesario, borrar el archivo `public/web.config`
 
+<hr />
+
+## Variables de entorno
+Se deben crear 3 archivos de variables de entorno:
+- `.env.production`
+- `.env.development`
+- `.env.staging` (En este es donde se configura para el entorno de desarrollo local)
+
+## Build
+- Local: `npm run build-local`
+- Réplica: `npm run build-dev`
+- Producción: `npm run build`
