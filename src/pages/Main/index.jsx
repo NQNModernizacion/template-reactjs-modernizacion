@@ -1,6 +1,11 @@
 import { useContext, useEffect } from "react";
 
-import { Link, RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Link,
+  RouterProvider,
+  createBrowserRouter,
+  Outlet,
+} from "react-router-dom";
 
 import { Uno, Dos, Tres } from "../";
 
@@ -20,11 +25,14 @@ const Main = () => {
 
   const RenderLinks = () => {
     return (
-      <div className="d-fles">
-        <Link to="/" className="btn btn-primary me-2">
-          Home
-        </Link>
-      </div>
+      <>
+        <div className="d-flex">
+          <Link to="/" className="btn btn-primary me-2">
+            Home
+          </Link>
+        </div>
+        <Outlet />
+      </>
     );
   };
 
@@ -38,25 +46,29 @@ const Main = () => {
           element: <Main />,
         },
         {
-          path: "/uno",
+          path: "uno",
           element: <Uno />,
         },
         {
-          path: "/uno/cuatro",
+          path: "uno/cuatro",
           element: <Uno />,
         },
         {
-          path: "/dos",
+          path: "dos",
           element: <Dos />,
         },
         {
-          path: "/tres/:id",
+          path: "tres/:id",
           element: <Tres />,
         },
       ],
     },
+    {
+      path: "*",
+      element: <Uno />,
+    },
   ]);
-  
+
   return <RouterProvider router={router} />;
 
   // return (
