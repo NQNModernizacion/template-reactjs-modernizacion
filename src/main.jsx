@@ -6,10 +6,11 @@ import { Main } from "./pages";
 import "./assets/css/index.scss";
 import { UserWrapper } from "./context";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.render(
   <React.StrictMode>
     <UserWrapper>
       <Main />
     </UserWrapper>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
