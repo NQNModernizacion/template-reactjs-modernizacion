@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 
-import { Link, createHashRouter, RouterProvider } from "react-router-dom";
+import { Link, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { Uno, Dos, Tres } from "../";
 
@@ -14,7 +14,7 @@ const Main = () => {
   const { actions, loading } = useContext(UserContext);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => handlerGetUserData(actions), []);
+  useEffect(handlerGetUserData(actions), []);
 
   showSpinner(loading);
 
@@ -28,7 +28,7 @@ const Main = () => {
     );
   };
 
-  const router = createHashRouter([
+  const router = createBrowserRouter([
     {
       path: "/",
       element: <RenderLinks />,
@@ -56,6 +56,7 @@ const Main = () => {
       ],
     },
   ]);
+  
   return <RouterProvider router={router} />;
 
   // return (
