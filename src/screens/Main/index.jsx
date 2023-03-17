@@ -75,6 +75,7 @@ const Main = () => {
             />
             <Route path="/tres/:id" element={<Tres />} />
           </Route>
+          {/* Rutas que solo van a tener layout */}
           <Route
             path="/cuatro"
             element={
@@ -82,6 +83,7 @@ const Main = () => {
             }
           />
         </Route>
+        {/* Rutas que estan por fuera del layout */}
         <Route
           path="/cinco"
           element={<div className="bg-white">RUTA SIN LAYOUT NI BOTONES</div>}
