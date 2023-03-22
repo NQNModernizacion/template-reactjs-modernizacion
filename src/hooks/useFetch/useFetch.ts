@@ -5,6 +5,17 @@ import {
   BACK_METHODS_OPTIONS,
 } from "./config";
 
+/**
+ * En caso de querer modificar los tipos de headers o métodos, entrar a hooks/useFetch/config.ts
+ * 
+ * El retorno se puede modificar para también retornar los setters de los estados en caso de que se vuelvan a usar
+ *
+ * @param url endpoint url
+ * @param method http method: GET | POST | PATCH
+ * @param headerType headers para la aplicación seleccionada: PHP | LARAVEL | PUBLIC_PHP | PUBLIC_LARAVEL
+ * @param body data to send | undefined
+ * @returns Object {data, error, loading}
+ */
 export default function useFetch(
   url: string,
   method: keyof typeof BACK_METHODS_OPTIONS,
@@ -33,5 +44,5 @@ export default function useFetch(
       .finally(() => setLoading(false));
   }, []);
 
-  return { data, loading, error, setData };
+  return { data, loading, error };
 }
