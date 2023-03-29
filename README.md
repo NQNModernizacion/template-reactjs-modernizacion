@@ -74,8 +74,8 @@ El manejo de errores no está implementado más allá de una catch en el fetch. 
 
 ### Contingencias
 En caso de que se presente un error con la importación del hook a algún componente, lo más probable es que sea el archivo `.ts`.
-Se recomienda modificar el archivo a `.js` y hacer los cambios para que funcione sin el tipado por defecto.
-Ejemplo:
+Se recomienda modificar el archivo a `.js` y hacer los cambios para que funcione sin el tipado por defecto.<br>
+Ejemplo:<br>
 `useFetch.js`
 ```javascript
 export default function useFetch(
@@ -123,7 +123,7 @@ export default function useFetch(
 ```
 `config.js`
 ```javascript
-export const BACK_HEADERS = {
+export const BACK_HEADERS: any = {
   PHP: {
     Authorization: `Bearer ${getToken()}`,
     "X-Requested-With": "XMLHttpRequest",
@@ -133,7 +133,15 @@ export const BACK_HEADERS = {
     Authorization: `Bearer ${getToken()}`,
     "X-Requested-With": "XMLHttpRequest",
     Accept: "application/json",
-  }
+  },
+  PUBLIC_PHP: {
+    "X-Requested-With": "XMLHttpRequest",
+    Accept: "application/json",
+  },
+  PUBLIC_LARAVEL: {
+    "X-Requested-With": "XMLHttpRequest",
+    Accept: "application/json",
+  },
 };
 ```
 
