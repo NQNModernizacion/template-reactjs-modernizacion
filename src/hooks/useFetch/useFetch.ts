@@ -7,14 +7,14 @@ import {
 
 /**
  * En caso de querer modificar los tipos de headers o métodos, entrar a hooks/useFetch/config.ts
- * 
+ *
  * El retorno se puede modificar para también retornar los setters de los estados en caso de que se vuelvan a usar
  *
  * @param url endpoint url
  * @param method http method: GET | POST | PATCH
  * @param headerType headers para la aplicación seleccionada: PHP | LARAVEL | PUBLIC_PHP | PUBLIC_LARAVEL
  * @param body data to send | undefined
- * @returns Object {data, error, loading}
+ * @returns Object {data, error, loading, handleCancelRequest}
  */
 export default function useFetch(
   url: string,
@@ -24,11 +24,14 @@ export default function useFetch(
 ) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError]: any = useState(null);
+  const [controller, setController]: any = useState(null);
 
   const headers = BACK_HEADERS[headerType];
 
   useEffect(() => {
+    const abortController = new AbortController();
+    setController(abortController);
     setLoading(true);
     fetch(url, {
       method,
@@ -42,7 +45,16 @@ export default function useFetch(
       })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
+
+    return () => abortController.abort();
   }, []);
 
-  return { data, loading, error };
+  const handleCancelRequest = () => {
+    if (controller) {
+      controller.abort();
+      setError("Request cancelada");
+    }
+  };
+
+  return { data, loading, error, handleCancelRequest };
 }

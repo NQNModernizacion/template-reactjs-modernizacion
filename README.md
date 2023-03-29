@@ -48,10 +48,12 @@
 
 # Custom hooks
 ## useFetch
-El hook se encuentra dentro de `src/hooks/useFetch`.
-Para personalizar el hook se debe editar `useFetch.ts`.
-En caso de querer modificar los tipos de headers y métodos se debe ingresar a `config.ts`.
-Por cualquier cosa esos archivos cuentan con explicaciones detalladas de cómo editarlos.
+El hook se encuentra dentro de `src/hooks/useFetch`.<br>
+Para personalizar el hook se debe editar `useFetch.ts`.<br>
+En caso de querer modificar los tipos de headers y métodos se debe ingresar a `config.ts`.<br>
+Por cualquier cosa esos archivos cuentan con explicaciones detalladas de cómo editarlos.<br>
+El hook también cuenta con una función para abortar todos los procesos que puedan haber quedado en ejecución a la hora de salir del componente que lo invoca, y también provee una función similar para invocar y cancelar a gusto ese fetch.
+
 ### Parámetros
 - `url`: endpoint al que se va a apuntar
 - `method`: método http que se va a usar. Por defecto están GET, POST y PATCH
@@ -59,12 +61,80 @@ Por cualquier cosa esos archivos cuentan con explicaciones detalladas de cómo e
 - `body`: objeto js ya transformado en JSON o un FormData (en caso de FormData revisar los headers predefinidos).
 
 ### Retorno
-El hook cuenta con un objeto con 3 estados predefinidos:
+El hook retorna un objeto con 4 estados predefinidos:
 - `data`: información devuelta por el endpoint consultado.
 - `error`: error que se puede haber seteado en caso de un problema en la comunicación (si no hay ninguno está `null`).
 - `loading`: se utiliza para renderizar un spinner o algún tipo de carga mientras se hace la consulta.
+- `handleCancelRequest`: función que se puede asignar a un botón o acción y permite cancelar todos los procesos asíncronos que hayan quedado en ejecución.
 
-Se puede modificar el hook para que también retorne las funciones que setean los estados. 
+Se puede modificar el hook para que también retorne las funciones que setean los estados(`setData`, `setError`, `setLoading`). 
 
 ### Manejo de errores
-El manejo de errores no está implementado más allá de una catch en el fetch. Por ende si se quiere personalizar hay que modificar el archivo.
+El manejo de errores no está implementado más allá de una catch en el fetch. Por ende si se quiere personalizar hay que modificar el archivo a gusto.
+
+### Contingencias
+En caso de que se presente un error con la importación del hook a algún componente, lo más probable es que sea el archivo `.ts`.
+Se recomienda modificar el archivo a `.js` y hacer los cambios para que funcione sin el tipado por defecto.
+Ejemplo:
+`useFetch.js`
+```javascript
+export default function useFetch(
+  url,
+  method,
+  headerType,
+  body
+) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [controller, setController] = useState(null);
+
+  const headers = BACK_HEADERS[headerType];
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    setController(abortController);
+    setLoading(true);
+    fetch(url, {
+      method,
+      body,
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.data) setData(data.data);
+        if (data.error) setError(data.error);
+      })
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+
+    return () => abortController.abort();
+  }, []);
+
+  const handleCancelRequest = () => {
+    if (controller) {
+      controller.abort();
+      setError("Request cancelada");
+    }
+  };
+
+  return { data, loading, error, handleCancelRequest };
+}
+```
+`config.js`
+```javascript
+export const BACK_HEADERS = {
+  PHP: {
+    Authorization: `Bearer ${getToken()}`,
+    "X-Requested-With": "XMLHttpRequest",
+    Accept: "application/json",
+  },
+  LARAVEL: {
+    Authorization: `Bearer ${getToken()}`,
+    "X-Requested-With": "XMLHttpRequest",
+    Accept: "application/json",
+  }
+};
+```
+
+Lo único que se hizo en ambos casos fue quitar los tipados y en el caso de `config.js` también se quitaron `BACK_HEADERS_OPTIONS` y `BACK_METHOD_OPTIONS` que sirven como diccionario para las recomendaciones para los parámetros cuando se usa en ts.
