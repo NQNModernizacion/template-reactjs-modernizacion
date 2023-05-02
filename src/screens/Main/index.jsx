@@ -1,68 +1,31 @@
 import { useContext, useEffect } from "react";
 
-import {
-  HashRouter,
-  Routes as Switch,
-  Route,
-  Link,
-  BrowserRouter,
-  Outlet,
-} from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
-import { Layout, Uno, Dos, Tres } from "../";
+import { Layout, Tres } from "../";
 
-import { UserContext } from "../../context";
+import { UserContext } from "../../context/UserWrapper";
 import { initApp } from "../../utils/common";
-import { handlerGetUserData, showSpinner } from "./handlers";
-
-initApp();
+import { showSpinner } from "./handlers";
+import LinkButtons from "../Layout/LinkButtons";
 
 const Main = () => {
   const { actions, loading } = useContext(UserContext);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(handlerGetUserData(actions), []);
+  // useEffect(handlerGetUserData(actions), []);
+  useEffect(() => initApp(actions), []);
 
-  //   showSpinner(loading);
-
-  const RenderLinks = () => {
-    return (
-      <>
-        <div className="d-fles">
-          <Link to="/" className="btn btn-primary me-2">
-            Home
-          </Link>
-          <Link to="/uno" className="btn btn-primary me-2">
-            uno
-          </Link>
-          <Link to="/dos" className="btn btn-primary me-2">
-            DOS
-          </Link>
-          <Link to="/tres/1" className="btn btn-primary me-2">
-            TRES/1
-          </Link>
-          <Link to="/cuatro" className="btn btn-primary me-2">
-            RUTA S/ BOTONES
-          </Link>
-          <Link to="/cinco" className="btn btn-primary me-2">
-            RUTA S/ LAYOUT
-          </Link>
-        </div>
-        <div>
-          <Outlet />
-        </div>
-      </>
-    );
-  };
+  showSpinner(loading);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       {/* Contenedor de todas las rutas */}
-      <Switch>
+      <Routes>
         {/* Layout con la navbar */}
         <Route element={<Layout />}>
           {/* Contenedor de los botones */}
-          <Route element={<RenderLinks />}>
+          <Route element={<LinkButtons />}>
             {/* Rutas que van a tener layout y botones */}
             <Route path="/" element={<div className="bg-white">HOME</div>} />
             <Route
@@ -84,12 +47,9 @@ const Main = () => {
           />
         </Route>
         {/* Rutas que estan por fuera del layout */}
-        <Route
-          path="/cinco"
-          element={<div className="bg-white">RUTA SIN LAYOUT NI BOTONES</div>}
-        />
-      </Switch>
-    </BrowserRouter>
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </HashRouter>
   );
 };
 

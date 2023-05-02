@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { Main } from './screens';
+import { Main } from "./screens";
 
-import './css/index.scss';
+import "./css/index.scss";
 
-import { UserWrapper } from './context';
+import { UserWrapper } from "./context";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,5 +13,5 @@ ReactDOM.render(
       <Main />
     </UserWrapper>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
