@@ -1,20 +1,27 @@
-import { HOME_SCREEN } from '../../config/types';
-import UserBanner from './UserBanner';
+import { Outlet } from "react-router-dom";
+import { HOME_SCREEN } from "../../config/types";
+import UserBanner from "./UserBanner";
 
 const Layout = ({ children, renderProp }) => {
-    return (
-        <>
-            <nav className="navbar navbar-expand-lg d-flex justify-content-between">
-                <span className="navbar-brand logo" type="button" name={HOME_SCREEN}></span>
-                <UserBanner nombre={'NOMBRE'} />
-            </nav>
-            <div className="container">
-                {renderProp && renderProp()}
+  return (
+    <>
+      <nav className="navbar navbar-expand-lg d-flex justify-content-between">
+        <span
+          className="navbar-brand logo"
+          type="button"
+          name={HOME_SCREEN}
+        ></span>
+        <UserBanner nombre={"NOMBRE"} />
+      </nav>
+      <div className="container">
+        {renderProp && renderProp()}
 
-                <div className="row pt-3 m-0">{children}</div>
-            </div>
-        </>
-    );
+        <div className="row pt-3 m-0">
+          <Outlet />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Layout;
