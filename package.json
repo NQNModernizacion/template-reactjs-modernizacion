@@ -1,5 +1,6 @@
 {
     "name": "template-reactjs-modernizacion",
+    "homepage": "/apps/TEMPLATE",
     "version": "1.0.0",
     "description": "Témplate básico de RactJS",
     "dependencies": {
@@ -20,16 +21,14 @@
         "react-router-dom": "^6.7.0",
         "react-scripts": "5.0.1",
         "react-select": "^5.4.0",
-        "react-toastify": "^9.1.2",
+        "react-toastify": "^9.1.3",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build && dev:xcopy",
+        "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "dev:del": "rmdir /s /q C:\\laragon\\www\\template-reactjs-modernizacion\\",
-        "xcopy": "xcopy D:\\Proyectos\\template-reactjs-modernizacion\\build C:\\laragon\\www\\template-reactjs-modernizacion /E/H/C"
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": [

@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 import { toastOptions } from '../../config/toast';
 
-import { axios } from "../../utils/api";
+import { axios } from "../../utils/axios";
 import { setSession } from "../../utils/sessionStorage";
 
 window.addEventListener("popstate", function (event) {
@@ -15,6 +15,7 @@ export const handleLogin = async (e, actions, body, nav) => {
   actions.setLoading(true);
 
   const response = await axios().post("internal_login", body);
+  console.log(response);
   const { data, error } = response.data;
 
   if (data) {
@@ -22,7 +23,7 @@ export const handleLogin = async (e, actions, body, nav) => {
     setSession(data);
     const userData = await axios().get("get_user_info");
     actions.setUser(userData.data.data);
-    nav(`/`);    
+    nav(`/`);
   }
 
   if (error) {

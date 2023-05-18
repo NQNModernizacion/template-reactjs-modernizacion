@@ -1,3 +1,5 @@
+import { WEBLOGIN_URL } from "../config";
+
 const KEY = window.location.origin;
 
 export const getSession = () => JSON.parse(sessionStorage.getItem(KEY));
@@ -22,12 +24,17 @@ export const isValidSession = () => {
   return valid;
 };
 
+export const logout = () => {
+  sessionStorage.removeItem(KEY);
+  window.location.href = WEBLOGIN_URL
+};
+
 /** Genera un intervalo para analizar la session */
-// export const intervalSession = (expires_in) => {
-//     const inter = setInterval(() => {
-//         if (expires_in - new Date().getTime() < 0) {
-//             logout()
-//             clearInterval(inter)
-//         }
-//     }, 180000);
-// }
+export const intervalSession = (expires_in) => {
+  const inter = setInterval(() => {
+    if (expires_in - new Date().getTime() < 0) {
+      logout()
+      clearInterval(inter)
+    }
+  }, 180000);
+}

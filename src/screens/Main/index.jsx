@@ -1,56 +1,33 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect } from 'react';
 
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
-import { Layout, Tres } from "../";
+import { Layout } from '../';
 
-import { UserContext } from "../../context/UserWrapper";
-import { initApp } from "../../utils/common";
-import { showSpinner } from "./handlers";
-import LinkButtons from "../Layout/LinkButtons";
+import { UserContext } from '../../context/UserWrapper';
+import { initApp, showSpinner } from './handlers';
+import Login from '../Login';
 
 const Main = () => {
-  const { actions, loading } = useContext(UserContext);
+    const { actions, loading } = useContext(UserContext);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // useEffect(handlerGetUserData(actions), []);
-  useEffect(() => initApp(actions), []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => initApp(actions), []);
 
-  showSpinner(loading);
+    showSpinner(loading);
 
-  return (
-    <HashRouter>
-      {/* Contenedor de todas las rutas */}
-      <Routes>
-        {/* Layout con la navbar */}
-        <Route element={<Layout />}>
-          {/* Contenedor de los botones */}
-          <Route element={<LinkButtons />}>
-            {/* Rutas que van a tener layout y botones */}
-            <Route path="/" element={<div className="bg-white">HOME</div>} />
-            <Route
-              path="uno"
-              element={<div className="bg-white">UNA RUTA CON LAYOUT</div>}
-            />
-            <Route
-              path="/dos"
-              element={<div className="bg-white">UNA RUTA CON LAYOUT</div>}
-            />
-            <Route path="/tres/:id" element={<Tres />} />
-          </Route>
-          {/* Rutas que solo van a tener layout */}
-          <Route
-            path="/cuatro"
-            element={
-              <div className="bg-white">RUTA CON LAYOUT PERO SIN BOTONES</div>
-            }
-          />
-        </Route>
-        {/* Rutas que estan por fuera del layout */}
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </HashRouter>
-  );
+    return (
+        <HashRouter>
+            <Routes>
+                <Route element={<Layout perfil={actions.getPerfil()} />}>
+                    <Route path="/" element={'Prueba'} />
+
+                    <Route path="*" element={'404 - HAY QUE DEFINIR'} />
+                </Route>
+                <Route path="/login" element={<Login />} />
+            </Routes>
+        </HashRouter>
+    );
 };
 
 export default Main;

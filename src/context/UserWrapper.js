@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { ToastContainer } from 'react-toastify';
 
-import { hasRole, hasPermission } from './utils';
+import { hasRole, hasPermission } from './handlers';
 
 export const UserContext = React.createContext(null);
 
@@ -8,25 +9,23 @@ export const UserWrapper = ({ children }) => {
 
     const [store, setStore] = useState({
         loading: true,
-        error: null,
-        user: null,
+        data: null,
     });
 
     const actions = {
-        setUser: (user) => setStore({ ...store, user, loading: false }),
-        setError: (error) => setStore({ ...store, user: null, error, loading: false }),
+        setUser: (data) => setStore({ ...store, data, loading: false }),
+        setLoading: (bool) => setStore({ ...store, loading: bool }),
 
-        /* Dat | */
-        getPerfil: () => store.user?.datosUsuario.datosPersonales,
-        getToken: () => store.user?.datosUsuario.securityToken,
+        getPerfil: () => store.data,
 
         hasRole: (role) => hasRole(role, store.user),
-        hasPermission: (role) => hasPermission(role, store.user),
+        hasPermission: (permission) => hasPermission(permission, store.user),
     }
 
     return (
         <UserContext.Provider value={{ store, actions, loading: store.loading }}>
             {children}
+            <ToastContainer />
         </UserContext.Provider>
     );
 }

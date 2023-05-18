@@ -14,7 +14,7 @@
 
 <hr/>
 
-3) Copiar el `.env` y generar `.env.development` y `.env.production`
+3) Copiar el `.env` y generar `.env.development` y `.env.production` y configurarlos.
 
 <hr/>
 
@@ -43,4 +43,8 @@
 <hr/>
 
 6) De ser necesario, borrar el archivo `public/web.config`
+
+<hr/>
+
+7) Cambiar el titulo del Componente `/src/screens/Login/index.jsx`
 

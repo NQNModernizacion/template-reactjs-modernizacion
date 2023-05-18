@@ -1,8 +1,22 @@
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+
 import { HOME_SCREEN } from "../../config/types";
+import { isValidSession } from "../../utils/sessionStorage";
+import { getParams } from "../../utils/common";
 import UserBanner from "./UserBanner";
 
 const Layout = ({ children, renderProp }) => {
+  const token = getParams().token
+  const nav = useNavigate()
+
+  useEffect(() => {
+    if (!isValidSession() && !token) nav("/login");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!isValidSession()) return null;
+
   return (
     <>
       <nav className="navbar navbar-expand-lg d-flex justify-content-between">

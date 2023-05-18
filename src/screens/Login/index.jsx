@@ -30,7 +30,7 @@ const Login = () => {
           onSubmit={login}
           className="p-4"
         >
-          <h3>Registro de proveedores</h3>
+          <h3>TITULO APLICACION</h3>
           <hr />
           <Input
             label="Correo Electronico"
