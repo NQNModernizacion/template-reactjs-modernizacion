@@ -1,6 +1,6 @@
-import { WEBLOGIN_URL } from "../config";
+import { APP_NAME, WEBLOGIN_URL } from "../config";
 
-const KEY = window.location.origin;
+const KEY = window.location.origin + '/' + APP_NAME;
 
 export const getSession = () => JSON.parse(sessionStorage.getItem(KEY));
 
