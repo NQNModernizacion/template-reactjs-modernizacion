@@ -27,6 +27,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "build:replica": "env-cmd -f .env.replica react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },

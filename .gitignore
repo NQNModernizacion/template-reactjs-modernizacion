@@ -78,6 +78,7 @@ typings/
 .env.test.local
 .env.production.local
 .env.development
+.env.replica
 .env.production
 
 package-lock.json

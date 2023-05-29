@@ -1,6 +1,6 @@
 import { axios } from "../../utils/axios";
 import { getParams, removeURLParameter } from "../../utils/common";
-import { getSession, setSession } from "../../utils/sessionStorage";
+import { getSession } from "../../utils/sessionStorage";
 import { isValidSession } from "../../utils/sessionStorage";
 
 /** Proceso inicial para el ingreso a la app */
@@ -19,8 +19,6 @@ export const initApp = async (actions) => {
     const { data, error } = response.data;
 
     if (data) {
-      data.expires_in += new Date().getTime();
-      setSession({ ...data, token });
       actions.setUser({ ...data, token });
     }
 
