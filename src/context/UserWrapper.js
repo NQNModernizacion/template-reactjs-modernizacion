@@ -26,8 +26,8 @@ export const UserWrapper = ({ children }) => {
 
         getPerfil: () => store.data,
 
-        hasRole: (role) => hasRole(role, store.user),
-        hasPermission: (permission) => hasPermission(permission, store.user),
+        hasRole: (role) => hasRole(role, store.data),
+        hasPermission: (permission) => hasPermission(permission, store.data),
     }
 
     /** Por cada update del state actualizamos la sesion */
