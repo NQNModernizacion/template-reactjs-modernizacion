@@ -1,5 +1,5 @@
 import { axios } from "../utils/axios";
-import { logout } from "../utils/sessionStorage";
+import { getSession, logout } from "../utils/sessionStorage";
 
 export const getInitialState = () => {
   const com = {
