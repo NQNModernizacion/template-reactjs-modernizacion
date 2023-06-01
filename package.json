@@ -1,11 +1,12 @@
 {
     "name": "template-reactjs-modernizacion",
-    "homepage": "/apps/TEMPLATE",
+    "homepage": "/apps/template",
     "version": "1.0.0",
-    "description": "Témplate básico de RactJS",
+    "description": "Template básico de ReactJS - Municipalidad de Neuquén",
     "dependencies": {
         "@emotion/react": "^11.10.4",
         "@emotion/styled": "^11.10.4",
+        "@mui/icons-material": "^5.11.16",
         "@mui/material": "^5.10.4",
         "@mui/x-data-grid": "^5.17.1",
         "@testing-library/jest-dom": "^5.16.2",

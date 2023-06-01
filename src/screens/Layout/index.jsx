@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { HOME_SCREEN } from "../../config/types";
-import { isValidSession } from "../../utils/sessionStorage";
+import { Navbar } from "../../components";
 import { getParams } from "../../utils/common";
-import UserBanner from "./UserBanner";
+import { isValidSession } from "../../utils/sessionStorage";
 
 const Layout = ({ children, renderProp }) => {
-  const token = getParams().token
-  const nav = useNavigate()
+  const token = getParams().token;
+  const nav = useNavigate();
 
   useEffect(() => {
     if (!isValidSession() && !token) nav("/login");
@@ -19,14 +18,7 @@ const Layout = ({ children, renderProp }) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg d-flex justify-content-between">
-        <span
-          className="navbar-brand logo"
-          type="button"
-          name={HOME_SCREEN}
-        ></span>
-        <UserBanner nombre={"NOMBRE"} />
-      </nav>
+      <Navbar />
       <div className="container">
         {renderProp && renderProp()}
 
