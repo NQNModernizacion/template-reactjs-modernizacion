@@ -1,3 +1,4 @@
+import { WEBLOGIN_URL } from "../../config";
 import { axios } from "../../utils/axios";
 import { getParams, removeURLParameter } from "../../utils/common";
 import { getSession } from "../../utils/sessionStorage";
@@ -12,7 +13,7 @@ export const initApp = async (actions) => {
     if (isValidSession()) {
       actions.setUser({ ...getSession() });
     } else {
-      /* 'retornamos webLogin' */
+      window.location.href = WEBLOGIN_URL
     }
   } else {
     const response = await axios(token).get("get_user_info");
@@ -26,9 +27,8 @@ export const initApp = async (actions) => {
       console.log("analizamos el error");
     }
 
-    // const url = removeURLParameter(loc.href, 'token')
-    window.location.href = removeURLParameter(loc.href, "token");
-    // window.history.pushState({}, null, url);
+    const url = removeURLParameter(loc.href, 'token')
+    window.history.pushState({}, null, url);
   }
 };
 
