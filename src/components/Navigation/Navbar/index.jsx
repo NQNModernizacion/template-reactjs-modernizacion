@@ -2,7 +2,7 @@ import { LogoutOutlined } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { Navbar } from "react-bootstrap";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/UserWrapper";
 import { getParams } from "../../../utils/common";
 import { isValidSession, logout } from "../../../utils/sessionStorage";
@@ -66,13 +66,6 @@ const Layout = ({ renderProp }) => {
           </Box>
         </Box>
       </Navbar>
-      <div className="container">
-        {renderProp && renderProp()}
-
-        <div className="row pt-3 m-0">
-          <Outlet />
-        </div>
-      </div>
     </Box>
   );
 };

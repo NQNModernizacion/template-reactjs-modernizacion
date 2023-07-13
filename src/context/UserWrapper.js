@@ -21,10 +21,11 @@ export const UserWrapper = ({ children }) => {
     useEffect(() => intervalSession(actions), []);
 
     const actions = {
-        setUser: (data) => setStore({ ...store, data, loading: false }),
-        setLoading: (bool) => setStore({ ...store, loading: bool }),
-        setSesionModal: (bool) => setStore({ ...store, sesionModal: bool }),
+        setUser: (data) => setStore((store) => ({ ...store, data, loading: false })),
+        setLoading: (bool) => setStore((store) => ({ ...store, loading: bool })),
 
+        setSesionModal: (bool) => setStore((store) => ({ ...store, sesionModal: bool })),
+        sesionModal: () => store?.sesionModal,
         getPerfil: () => store.data,
 
         hasRole: (role) => hasRole(role, store.user),
@@ -38,11 +39,12 @@ export const UserWrapper = ({ children }) => {
         <UserContext.Provider value={{ store, actions, loading: store.loading }}>
             {children}
             <ToastContainer />
+            button
 
             <Modal
                 styles={{ header: { backgroundColor: "#1766ad", color: "white" } }}
                 size={"md"}
-                show={store.sesionModal}
+                show={true}
                 setShow={() => logout()}
                 title={() => "SU SESION ESTA POR CADUCAR"}
             >

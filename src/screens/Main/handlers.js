@@ -1,4 +1,3 @@
-import { WEBLOGIN_URL } from "../../config";
 import { axios } from "../../utils/axios";
 import { getParams, removeURLParameter } from "../../utils/common";
 import { getSession } from "../../utils/sessionStorage";
@@ -13,7 +12,7 @@ export const initApp = async (actions) => {
     if (isValidSession()) {
       actions.setUser({ ...getSession() });
     } else {
-      window.location.href = WEBLOGIN_URL
+      /*  window.location.href = WEBLOGIN_URL */
     }
   } else {
     const response = await axios(token).get("get_user_info");
