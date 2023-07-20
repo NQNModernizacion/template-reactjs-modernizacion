@@ -1,7 +1,6 @@
 import { axios } from "../../utils/axios";
 import { getParams, removeURLParameter } from "../../utils/common";
-import { getSession } from "../../utils/sessionStorage";
-import { isValidSession } from "../../utils/sessionStorage";
+import { getSession, isValidSession } from "../../utils/sessionStorage";
 
 /** Proceso inicial para el ingreso a la app */
 export const initApp = async (actions) => {
@@ -19,14 +18,18 @@ export const initApp = async (actions) => {
     const { data, error } = response.data;
 
     if (data) {
-      actions.setUser({ ...data, token });
+      actions.setUser({
+        ...data,
+        token,
+      });
+      // setRoutes(filteredRoutes);
     }
 
     if (error) {
       console.log("analizamos el error");
     }
 
-    const url = removeURLParameter(loc.href, 'token')
+    const url = removeURLParameter(loc.href, "token");
     window.history.pushState({}, null, url);
   }
 };

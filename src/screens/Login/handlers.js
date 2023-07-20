@@ -1,6 +1,6 @@
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
-import { toastOptions } from '../../config/toast';
+import { toastOptions } from "../../config/toast";
 
 import { axios } from "../../utils/axios";
 
@@ -23,7 +23,7 @@ export const handleLogin = async (e, actions, body, nav) => {
 
   if (error) {
     /* Guardamos en los errores del contexto y lo mostramos con un popup */
-    toast.error(error, toastOptions)
+    toast.error(error, toastOptions);
     actions.setLoading(false);
   }
 };
