@@ -50,6 +50,16 @@ export const hasPermission = (permission, user) => {
   return permissionsRoles?.some((p) => p.name === permission);
 };
 
+export const hasPermissionInRoles = (permission, user) => {
+  if (!permission) return false;
+  if (!user) return false;
+
+  return user.roles
+    .map((r) => r.permissions)
+    .flat()
+    .some((p) => p.name === permission);
+};
+
 export const hasDirectPermission = (permission, user) => {
   if (!permission) return false;
   if (!user) return false;

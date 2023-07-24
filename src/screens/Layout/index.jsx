@@ -21,17 +21,17 @@ const Layout = ({ children, renderProp }) => {
       <Navbar />
       <div className="container">
         {renderProp && renderProp()}
-        <div className="row">
-          <Link className="btn btn-primary col-3" to="/administrador">
+        <div className="row gap-5 justify-center">
+          <Link className="btn btn-primary col-2" to="/administrador">
             Admin
           </Link>
-          <Link className="btn btn-primary col-3" to="/contribuyente">
+          <Link className="btn btn-primary col-2" to="/contribuyente">
             Contribuyente
           </Link>
-          <Link className="btn btn-primary col-3" to="/administrador/solicitud/1">
+          <Link className="btn btn-primary col-2" to="/administrador/solicitud/1">
             Admin Sol 1
           </Link>
-          <Link className="btn btn-primary col-3" to="/contribuyente/solicitud/1">
+          <Link className="btn btn-primary col-2" to="/contribuyente/solicitud/1">
             Contribuyente Sol 1
           </Link>
         </div>

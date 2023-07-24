@@ -15,7 +15,7 @@ export const pages = [
   {
     path: "/administrador",
     element: (
-      <PrivateRoute rol="admin">
+      <PrivateRoute rol="admin" permiso="admin.view">
         <VistaAdministrador />
       </PrivateRoute>
     ),
@@ -23,7 +23,7 @@ export const pages = [
   {
     path: "/administrador/solicitud/:id",
     element: (
-      <PrivateRoute rol="admin">
+      <PrivateRoute rol="admin" permiso="admin.view">
         <VistaSolicitudes />
       </PrivateRoute>
     ),

@@ -24,7 +24,7 @@ const Layout = ({ renderProp }) => {
 
   return (
     <Box>
-      <Navbar className="d-flex justify-content-around flex-wrap p-2 gap-1">
+      <Navbar className="d-flex justify-content-around flex-wrap p-2 mt-1 gap-1">
         <img
           alt="Logo Neuquen Capital"
           height="55%"

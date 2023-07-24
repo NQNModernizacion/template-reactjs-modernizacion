@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import {
   getInitialState,
   hasPermission,
+  hasPermissionInRoles,
   hasRole,
   reloadSesion,
 } from "./handlers";
@@ -31,7 +32,9 @@ export const UserWrapper = ({ children }) => {
     getPerfil: () => store.data,
 
     hasRole: (role) => hasRole(role, store.data),
-    hasPermission: (permission) => hasPermission(permission, store.user),
+    hasPermission: (permission) => hasPermission(permission, store.data),
+    hasPermissionInRoles: (permission) =>
+      hasPermissionInRoles(permission, store.data),
   };
 
   /** Por cada update del state actualizamos la sesion */

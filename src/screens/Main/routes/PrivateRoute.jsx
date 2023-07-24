@@ -2,10 +2,15 @@ import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { UserContext } from "../../../context";
 
-const PrivateRoute = ({ children, rol }) => {
+const PrivateRoute = ({ children, rol, permiso }) => {
   const { actions } = useContext(UserContext);
 
-  if (actions.hasRole(rol)) {
+  if (
+    ((rol || permiso) && actions.hasRole(rol)) ||
+    actions.hasPermission(permiso) ||
+    actions.hasPermissionInRoles(permiso)
+  ) {
+    actions.hasPermissionInRoles(permiso);
     return (
       <>
         <h5>Private Route</h5>
@@ -13,7 +18,7 @@ const PrivateRoute = ({ children, rol }) => {
       </>
     );
   } else {
-    return <Navigate to="/404"/>;
+    return <Navigate to="/404" />;
   }
 };
 
