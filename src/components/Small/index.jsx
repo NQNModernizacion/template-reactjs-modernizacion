@@ -1,18 +1,18 @@
 const Small = ({ msg, type, classname }) => {
-    let color = 'red';
+  let color = "red";
 
-    if (type === 'success') color = 'green';
-    if (type === 'info') color = 'blue';
+  if (type === "success") color = "green";
+  if (type === "info") color = "blue";
 
-    const style = {
-        color,
-    };
+  const style = {
+    color,
+  };
 
-    return (
-        <small style={style} className={classname}>
-            {msg}
-        </small>
-    );
+  return (
+    <small style={style} className={classname}>
+      {msg}
+    </small>
+  );
 };
 
 export default Small;
