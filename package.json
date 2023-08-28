@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "env-cmd -f .env.production npm run lint:fix && npm run format && vite build",
-    "build:replica": "env-cmd -f .env.development npm run lint:fix && npm run format && vite build",
+    "build:replica": "env-cmd -f .env.replica npm run lint:fix && npm run format && vite build",
     "preview": "vite preview",
     "test": "jest --watchAll",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,json}\" ",

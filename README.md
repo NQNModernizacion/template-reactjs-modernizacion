@@ -17,7 +17,7 @@
 
 <hr/>
 
-3. Copiar el `.env.example` y generar `.env`, `.env.development` y `.env.production`
+3. Copiar el `.env.example` y generar `.env`, `.env.replica` y `.env.production`
 
 <hr/>
 
