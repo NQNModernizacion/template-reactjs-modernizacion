@@ -44,7 +44,7 @@ export const UserWrapper = ({ children }) => {
             <Modal
                 styles={{ header: { backgroundColor: "#1766ad", color: "white" } }}
                 size={"md"}
-                show={true}
+                show={store.sesionModal}
                 setShow={() => logout()}
                 title={() => "SU SESION ESTA POR CADUCAR"}
             >
