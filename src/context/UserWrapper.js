@@ -28,8 +28,8 @@ export const UserWrapper = ({ children }) => {
         sesionModal: () => store?.sesionModal,
         getPerfil: () => store.data,
 
-        hasRole: (role) => hasRole(role, store.user),
-        hasPermission: (permission) => hasPermission(permission, store.user),
+        hasRole: (role) => hasRole(role, store.data),
+        hasPermission: (permission) => hasPermission(permission, store.data),
     };
 
     /** Por cada update del state actualizamos la sesion */
@@ -39,7 +39,6 @@ export const UserWrapper = ({ children }) => {
         <UserContext.Provider value={{ store, actions, loading: store.loading }}>
             {children}
             <ToastContainer />
-            button
 
             <Modal
                 styles={{ header: { backgroundColor: "#1766ad", color: "white" } }}

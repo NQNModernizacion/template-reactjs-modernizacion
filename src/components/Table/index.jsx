@@ -1,7 +1,7 @@
 import { DataGrid, esES } from '@mui/x-data-grid';
 import { useState } from 'react';
 
-const Table = ({ data, rowClick }) => {
+const Table = ({ data, rowClick, render }) => {
     const { rows, columns, filter } = data;
     const [state, setState] = useState('');
 
@@ -10,9 +10,11 @@ const Table = ({ data, rowClick }) => {
         <>
             <div className="card mb-1 d-flex flex-row">
                 <div className="d-flex flex-row p-2">
+                    <div className='d-flex flex-row'>
                     <label htmlFor="search" className="my-auto me-3" role="button">
                         Buscar
                     </label>
+                    </div>
                     <input
                         id="search"
                         type="search"
@@ -22,6 +24,7 @@ const Table = ({ data, rowClick }) => {
                         onChange={changeValue}
                     />
                 </div>
+                {render && render()}
             </div>
             <div style={{ height: 400 }}>
                 <DataGrid
