@@ -72,6 +72,7 @@ export default function Permisos() {
                                 <div className="mt-2">
                                     <Table
                                         data={dataTablePermisos(permisos.data, listado, setListado)}
+                                        checkbox={true}
                                         render={() => (
                                             <div className="d-flex justify-content-end w-100">
                                                 <button type="button" className="btn btn-sm btn-primary my-auto mx-3">Asignar Permisos seleccionados</button>

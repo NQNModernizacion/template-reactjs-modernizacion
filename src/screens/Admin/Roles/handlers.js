@@ -74,7 +74,7 @@ export const consultar_persona = async(persona, setPersona, setListado, listado)
         const {data, error} = response.data;
         if(data && !error){
             setPersona({...persona, loading:false, data:data});
-            console.log(data);
+            //console.log(data);
         }
 
         if(!data && error){
@@ -136,7 +136,7 @@ export const asignarRol = (listado, setListado, persona, setPersona, guardarRol,
       }
   }) */
   //setListado({ ...listado, roles_select: [], roles_asign: roles_asign, roles_no_asign: roles_no_asign_limpio });
-  setRole(guardarRol, setGuardarRol, persona, listado.roles_select, setPersona, listado, setListado);
+  setRole(guardarRol, setGuardarRol, persona, listado.roles_select_asign, setPersona, listado, setListado);
   
 }
 
@@ -166,3 +166,48 @@ export const setRole = async(guardarRol, setGuardarRol, persona, roles, setPerso
   }
 }
 
+
+export const desasignarRol = (listado, setListado, persona, setPersona, guardarRol, setGuardarRol) => {
+  //meter los nuevos roles en el roles_asign 
+  /* let roles_asign = listado.roles_asign;
+  listado.roles_select.filter(item => {
+      roles_asign.push(item);
+  })
+  //sacar roles de roles_no_asign 
+  let roles_no_asign = listado.roles_no_asign;
+  let roles_no_asign_limpio = [];
+  roles_no_asign_limpio = roles_no_asign.filter(item => {
+      if (!ver_role_en_select(item, listado)) {
+          return item;
+      }
+  }) */
+  //setListado({ ...listado, roles_select: [], roles_asign: roles_asign, roles_no_asign: roles_no_asign_limpio });
+  quitarRole(guardarRol, setGuardarRol, persona, listado.roles_select_no_asign, setPersona, listado, setListado);
+  
+}
+
+export const quitarRole = async(guardarRol, setGuardarRol, persona, roles, setPersona, listado, setListado)=>{
+  setGuardarRol({...guardarRol, loading:true})
+  let body = {
+    user_id: persona.data.user.usuarioID,
+    roles_id: roles.map(item=>{
+      return item.id
+    })
+  }
+  const response = await axios().post('/desasignarRoles/', body);
+  if(!isAxiosError(response)){
+      const {data, error} = response.data;
+      if(data && !error){
+          consultar_persona(persona, setPersona, setListado, listado)
+          setGuardarRol({...guardarRol, loading:false, data:data});
+          toast.success('Roles desasignados', toastOptions);
+      }
+
+      if(!data && error){
+          setGuardarRol({...guardarRol, loading:false, error:error});
+          toast.error(error, toastOptions);
+      }
+  }else{
+      setGuardarRol({...guardarRol, loading:false, error:'Hubo un error durante la consulta'});
+  }
+}

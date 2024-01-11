@@ -3,7 +3,8 @@ import {
     consultar_persona, 
     ver_role_en_persona,
     roles_string,
-    asignarRol 
+    asignarRol,
+    desasignarRol 
 } from "./handlers"
 import { useState, useEffect, useContext } from "react"
 import { UserContext } from "../../../context"
@@ -25,7 +26,7 @@ export default function Roles() {
     })
 
     const [listado, setListado] = useState({
-        roles: [], roles_asign: [], roles_no_asign: [], roles_select: [],
+        roles: [], roles_asign: [], roles_no_asign: [], roles_select_asign: [], roles_select_no_asign: []
     })
 
     const [guardarRol, setGuardarRol] = useState({
@@ -119,13 +120,13 @@ export default function Roles() {
                                             
                                                 
                                                 <SelectSearch
-                                                    value={listado.roles_select}
+                                                    value={listado.roles_select_asign}
                                                     key={'asignar'}
                                                     isMulti={true}
                                                     options={listado.roles_no_asign}
                                                     label={'Roles sin Asignar'}
                                                     onChange={(e) => {
-                                                        setListado({ ...listado, roles_select: e })
+                                                        setListado({ ...listado, roles_select_asing: e })
                                                         console.log(e)
                                                     }}
                                                     noData={() => { return 'No hay mas Roles' }}
@@ -142,8 +143,32 @@ export default function Roles() {
                                             >Asignar Roles seleccionados</button>}
                                     </div>
                                 </Tab>
-                                <Tab eventKey='desasignar' title='Desasignar'>
-                                    Desasignar Rol
+                                <Tab eventKey='desasignar' title='Desasignar Rol'>
+                                <div className="mx-3">
+                                        {listado.roles_asign.length > 0 &&
+                                                <SelectSearch
+                                                    value={listado.roles_select_no_asign}
+                                                    key={'desasignar'}
+                                                    isMulti={true}
+                                                    options={listado.roles_asign}
+                                                    label={'Roles a Desasignar'}
+                                                    onChange={(e) => {
+                                                        setListado({ ...listado, roles_select_no_asign: e })
+                                                        console.log(e)
+                                                    }}
+                                                    noData={() => { return 'No hay mas Roles' }}
+                                                    placeholder={'Buscar Roles...'}
+                                                ></SelectSearch>
+                                            
+                                        }
+                                        {actions.hasPermission('role.asign') &&                                            
+                                            <button 
+                                                type="button" 
+                                                className="btn btn-sm btn-primary" 
+                                                onClick={() => { desasignarRol(listado, setListado, persona, setPersona, guardarRol, setGuardarRol) }}
+                                                disabled={guardarRol.loading}
+                                            >Desasignar Roles seleccionados</button>}
+                                    </div>
                                 </Tab>
                             </Tabs>
                         </div>
