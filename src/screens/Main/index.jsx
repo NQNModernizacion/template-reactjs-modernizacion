@@ -10,6 +10,7 @@ import Login from '../Login';
 import Admin from '../Admin';
 import Roles from '../Admin/Roles';
 import Permisos from '../Admin/Permisos';
+import RolesPermisos from '../Admin/RolesPermisos';
 
 
 const Main = () => {
@@ -28,6 +29,7 @@ const Main = () => {
                     <Route path="/administrador/roles-permisos" element={<Admin/>} />
                     <Route path="/administrador/roles-permisos/roles" element={<Roles/>}/>
                     <Route path="/administrador/roles-permisos/permisos" element={<Permisos/>}/>
+                    <Route path="/administrador/roles-permisos/role-permisos" element={<RolesPermisos/>}/>
                     <Route path="*" element={'404 - HAY QUE DEFINIR'} />
                 </Route>
                 <Route path="/login" element={<Login />} />

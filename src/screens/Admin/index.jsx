@@ -21,6 +21,7 @@ export default function Admin(){
             <div className="w-100 d-flex justify-content-center gap-4">
             {actions.hasPermission('role.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/roles">Roles-Usuario</Link>}
             {actions.hasPermission('permission.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/permisos">Permisos-Usuario</Link>}
+            {actions.hasPermission('role-permission.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/role-permisos">Roles-Permisos</Link>}
             </div>
         </Container>
     )

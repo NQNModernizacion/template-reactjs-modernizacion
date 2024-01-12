@@ -37,6 +37,7 @@ const Table = ({ data, rowClick, render }) => {
                     density="compact"
                     disableColumnMenu
                     localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+                    keepNonExistentRowsSelected
                 />
             </div>
         </>

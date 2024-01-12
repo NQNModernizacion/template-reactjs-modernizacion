@@ -26,9 +26,7 @@ export default function Permisos() {
     })
 
     useEffect(() => {
-        if (actions.hasPermission('permission.view')) {
-            //getPermisos(permisos, setPermisos, listado, setListado, actions.hasPermission)
-        } else {
+        if (!actions.hasPermission('permission.view')) {
             if (actions.hasRole('admin')) {
                 navigate('/administrador/roles-permisos')
             } else {
@@ -76,7 +74,7 @@ export default function Permisos() {
                             {permisos.data &&
                                 <div className="mt-2">
                                     <Table
-                                        data={dataTablePermisos(permisos.data, listado, setListado, persona)}
+                                        data={dataTablePermisos(permisos.data, listado, setListado, persona, actions)}
                                         render={() => (
                                             <div className="d-flex justify-content-end w-100">
                                                 {actions.hasPermission('permission.asign') && <button

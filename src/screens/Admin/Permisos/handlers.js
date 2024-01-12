@@ -80,7 +80,7 @@ const tiene_permiso = (nombre, persona, listado, setListado) => {
   return tiene;
 }
 
-export const dataTablePermisos = (data, listado, setListado, persona) => {
+export const dataTablePermisos = (data, listado, setListado, persona, actions) => {
     const columns = [
       { field: "id", headerName: "Identificador", width: 10, flex: 0.5, hide:true},
       {
@@ -89,6 +89,7 @@ export const dataTablePermisos = (data, listado, setListado, persona) => {
         width: 50,
         flex: 0.2,
         sorteable: false,
+        hide: !actions.hasPermission('permission.asign'), 
         renderCell: (p) => {
           //console.log(p)
             return <div className='d-flex justify-content-evenly w-100'>
