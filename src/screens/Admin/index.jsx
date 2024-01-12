@@ -19,8 +19,8 @@ export default function Admin(){
     return (
         <Container linkBack={'/'} titulo={'Panel de Administración de Roles y Permisos'}>
             <div className="w-100 d-flex justify-content-center gap-4">
-            {actions.hasPermission('role.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/roles">Roles</Link>}
-            {actions.hasPermission('permission.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/permisos">Permisos</Link>}
+            {actions.hasPermission('role.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/roles">Roles-Usuario</Link>}
+            {actions.hasPermission('permission.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/permisos">Permisos-Usuario</Link>}
             </div>
         </Container>
     )

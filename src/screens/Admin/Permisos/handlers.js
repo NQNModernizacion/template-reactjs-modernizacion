@@ -3,15 +3,18 @@ import {isAxiosError} from 'axios';
 import {toast} from 'react-toastify';
 import {toastOptions} from '../../../config/toast';
 
-export const getPermisos = async(permisos, setPermisos, listado, setListado)=>{
-    setPermisos({...permisos, loading:true})
+export const getPermisos = async(permisos, setPermisos, listado, setListado, perms)=>{
+    setPermisos({...permisos, loading:true, data:null})
     const response = await axios().get('/permisos');
     if(!isAxiosError(response)){
         const {data, error} = response.data;
         if(data && !error){
             setPermisos({...permisos, loading:false, data:data});
             toast.success('Permisos cargados', toastOptions);
-            setListado({...listado, permisos_select:[], permisos:data})
+            /* let lista = perms.map(item=>{
+              return item.id
+            }) */
+            setListado({...listado, permisos:data, permisos_select:perms})
         }
 
         if(!data && error){
@@ -23,7 +26,7 @@ export const getPermisos = async(permisos, setPermisos, listado, setListado)=>{
     }
 }
 
-export const consultar_persona = async(e, persona, setPersona, setListado, listado)=>{
+export const consultar_persona = async(e, persona, setPersona, setListado, listado, setPermisos, permisos)=>{
     e.preventDefault();
     setListado({...listado, permisos_asign:[], permisos_no_asign:[], permisos_select:[]});
     setPersona({...persona, loading:true, data:null})
@@ -32,7 +35,9 @@ export const consultar_persona = async(e, persona, setPersona, setListado, lista
         const {data, error} = response.data;
         if(data && !error){
             setPersona({...persona, loading:false, data:data});
-            console.log(data);
+            let listado = data.permisos.map(item=>item.id)
+            getPermisos(permisos, setPermisos, listado, setListado, listado)
+
         }
 
         if(!data && error){
@@ -50,10 +55,32 @@ export const consultar_persona = async(e, persona, setPersona, setListado, lista
 }
 
 const seleccionar = (e, listado, setListado)=>{
-   
+  if(e.target.checked){
+    let list = listado.permisos_select;
+    list.push(parseInt(e.target.value));
+    setListado({...listado, permisos_select: list});
+  }else{
+    let list = listado.permisos_select;
+    let lista = list.filter(item => {
+      if(item != e.target.value){
+        return item
+      }
+    }) 
+    setListado({...listado, permisos_select: lista})
+  }
 }
 
-export const dataTablePermisos = (data, listado, setListado) => {
+const tiene_permiso = (nombre, persona, listado, setListado) => {
+  let tiene = false;
+  persona.data.permisos.map(item=>{
+    if(item.name === nombre){
+      tiene = true;
+    }
+  })
+  return tiene;
+}
+
+export const dataTablePermisos = (data, listado, setListado, persona) => {
     const columns = [
       { field: "id", headerName: "Identificador", width: 10, flex: 0.5, hide:true},
       {
@@ -63,8 +90,21 @@ export const dataTablePermisos = (data, listado, setListado) => {
         flex: 0.2,
         sorteable: false,
         renderCell: (p) => {
+          //console.log(p)
             return <div className='d-flex justify-content-evenly w-100'>
-                <input type='checkbox' key={p.id} onChange={(e, listado, setListado)=>seleccionar(e)}></input>
+                <input 
+                  type='checkbox' 
+                  key={p.id}
+                  id={p.row.id}
+                  value={p.row.id}
+                  defaultChecked={tiene_permiso(p.row.name, persona, listado, setListado)}
+                  
+                  onChange={(e)=>{
+                    //console.log(e.target.checked)
+                    //e.target.checked = e.target.checked
+                    seleccionar(e, listado, setListado);}
+                  }
+                  ></input>
             </div>
           },
       },
@@ -88,8 +128,7 @@ export const dataTablePermisos = (data, listado, setListado) => {
       return {
         id: d.id,
         name: d.name,
-        description: d.description,
-        accion: d.id
+        description: d.description
       };
     });
   
@@ -104,3 +143,28 @@ export const dataTablePermisos = (data, listado, setListado) => {
   
     return { columns, rows, filter };
   };
+
+  export const GuardarPermisos = async(persona, guardarPermisos, setGuardarPermisos, permisosSelect, permisos, setPermisos, listado, setListado)=>{
+    setGuardarPermisos({...guardarPermisos, loading:true})
+    const response = await axios().post('/sincronizarPermisos', {
+      user_id:persona.data.user.usuarioID,
+      permisos_id:permisosSelect
+    });
+    if(!isAxiosError(response)){
+        const {data, error} = response.data;
+        if(data && !error){
+            setGuardarPermisos({...guardarPermisos, loading:false, data:data})
+            toast.success('Permisos actualizados', toastOptions);
+            //setPermisos({...permisos, data:null});
+            //console.log(permisosSelect)
+            //getPermisos(permisos, setPermisos, listado, setListado, permisosSelect)
+        }
+
+        if(!data && error){
+            setGuardarPermisos({...guardarPermisos, loading:false, error:error})
+            toast.error(error, toastOptions);
+        }
+    }else{
+        setGuardarPermisos({...guardarPermisos, loading:false, error:'Hubo un error durante la consulta'});
+    }
+}

@@ -1,7 +1,7 @@
 import { DataGrid, esES } from '@mui/x-data-grid';
 import { useState } from 'react';
 
-const Table = ({ data, rowClick, render, checkbox }) => {
+const Table = ({ data, rowClick, render }) => {
     const { rows, columns, filter } = data;
     const [state, setState] = useState('');
 
