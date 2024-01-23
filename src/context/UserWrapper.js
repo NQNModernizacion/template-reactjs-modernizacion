@@ -6,6 +6,7 @@ import {
     hasPermission,
     hasRole,
     reloadSesion,
+    isAdmin
 } from "./handlers";
 
 import { useEffect } from "react";
@@ -30,6 +31,7 @@ export const UserWrapper = ({ children }) => {
 
         hasRole: (role) => hasRole(role, store.data),
         hasPermission: (permission) => hasPermission(permission, store.data),
+        isAdmin: () => isAdmin(store.data)
     };
 
     /** Por cada update del state actualizamos la sesion */

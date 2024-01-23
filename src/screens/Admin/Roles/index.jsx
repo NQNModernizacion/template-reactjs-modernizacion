@@ -61,7 +61,7 @@ export default function Roles() {
     }, [persona.data])
 
     useEffect(() => {
-        if (actions.hasPermission('role.view')) {
+        if (actions.hasPermission('admin.role.view')) {
             getRoles(roles, setRoles);
         } else {
             if (actions.hasRole('admin')) {
@@ -117,8 +117,6 @@ export default function Roles() {
                                 <Tab eventKey='asignar' title='Asignar Rol'>
                                     <div className="mx-3">
                                         {listado.roles_no_asign.length > 0 &&
-                                            
-                                                
                                                 <SelectSearch
                                                     value={listado.roles_select_asign}
                                                     key={'asignar'}
@@ -126,15 +124,15 @@ export default function Roles() {
                                                     options={listado.roles_no_asign}
                                                     label={'Roles sin Asignar'}
                                                     onChange={(e) => {
-                                                        setListado({ ...listado, roles_select_asing: e })
-                                                        console.log(e)
+                                                        setListado({...listado, roles_select_asign: e })
+                                                        //console.log(listado.roles_no_asign)
+                                                        //console.log(listado.roles_select_asign)
                                                     }}
                                                     noData={() => { return 'No hay mas Roles' }}
                                                     placeholder={'Buscar Roles...'}
-                                                ></SelectSearch>
-                                            
+                                                ></SelectSearch>  
                                         }
-                                        {actions.hasPermission('role.asign') &&                                            
+                                        {actions.hasPermission('admin.role.asign') &&                                            
                                             <button 
                                                 type="button" 
                                                 className="btn btn-sm btn-primary" 
@@ -146,6 +144,7 @@ export default function Roles() {
                                 <Tab eventKey='desasignar' title='Desasignar Rol'>
                                 <div className="mx-3">
                                         {listado.roles_asign.length > 0 &&
+                                        
                                                 <SelectSearch
                                                     value={listado.roles_select_no_asign}
                                                     key={'desasignar'}
@@ -153,15 +152,15 @@ export default function Roles() {
                                                     options={listado.roles_asign}
                                                     label={'Roles a Desasignar'}
                                                     onChange={(e) => {
-                                                        setListado({ ...listado, roles_select_no_asign: e })
-                                                        console.log(e)
+                                                        setListado({...listado, roles_select_no_asign: e })
+                                                        //console.log(listado.roles_asign)
+                                                        //console.log(listado.roles_select_no_asign)
                                                     }}
                                                     noData={() => { return 'No hay mas Roles' }}
                                                     placeholder={'Buscar Roles...'}
-                                                ></SelectSearch>
-                                            
+                                                ></SelectSearch>    
                                         }
-                                        {actions.hasPermission('role.asign') &&                                            
+                                        {actions.hasPermission('admin.role.asign') &&                                            
                                             <button 
                                                 type="button" 
                                                 className="btn btn-sm btn-primary" 

@@ -30,7 +30,7 @@ const Main = () => {
                     <Route path="/administrador/roles-permisos/roles" element={<Roles/>}/>
                     <Route path="/administrador/roles-permisos/permisos" element={<Permisos/>}/>
                     <Route path="/administrador/roles-permisos/role-permisos" element={<RolesPermisos/>}/>
-                    <Route path="/log-actividad" element={<Actividad/>}/>
+                    <Route path="/administrador/activity-log" element={<Actividad/>}/>
                     <Route path="*" element={'404 - HAY QUE DEFINIR'} />
                 </Route>
                 <Route path="/login" element={<Login />} />

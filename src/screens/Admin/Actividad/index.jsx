@@ -17,13 +17,25 @@ export default function Actividad() {
 
     const [data, setData] = useState(null);
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (!actions.hasRole('admin') && !actions.hasPermission('activity.log')) {
             navigate('/')
         } else {
             getActivity(actividad, setActividad)
         }
-    }, [])
+    }, []) */
+
+    useEffect(() => {
+      if (!actions.hasPermission('admin.activity.log') && !actions.isAdmin()) {
+          if (actions.hasRole('admin')) {
+              navigate('/administrador/roles-permisos')
+          } else {
+              navigate('/');
+          }
+      }else{
+        getActivity(actividad, setActividad)
+      }
+  }, [])
 
     return (
         <section className="col-12 col-md-12 col-xl-12 mx-auto mb-5">

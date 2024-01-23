@@ -57,6 +57,18 @@ export const hasDirectPermission = (permission, user) => {
   return user.permissions?.some((p) => p.name === permission);
 };
 
+export const isAdmin = (user) => {
+  if (!user) return false;
+  return user.permissions?.some((p) => {
+    let name = p.name.split('.');
+    if(name[0] === 'admin'){
+      return true;
+    }else{
+      return false;
+    }
+  })
+}
+
 export const reloadSesion = async (setStore) => {
   setStore((store) => ({ ...store, loading: true }));
 
@@ -79,3 +91,5 @@ export const reloadSesion = async (setStore) => {
     logout();
   }
 };
+
+

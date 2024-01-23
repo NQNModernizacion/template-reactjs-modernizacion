@@ -25,7 +25,7 @@ export default function RolesPermisos() {
     })
 
     useEffect(() => {
-        if (!actions.hasPermission('role-permission.view')) {
+        if (!actions.hasPermission('admin.role-permission.view')) {
             if (actions.hasRole('admin')) {
                 navigate('/administrador/roles-permisos')
             } else {
@@ -82,7 +82,7 @@ export default function RolesPermisos() {
                         data={dataTablePermisos(permisos.data, rol.permisos_rol, actions, rol, setRol)}
                         render={()=>(
                             <div className="d-flex justify-content-end w-100">
-                                {actions.hasPermission('role-permission.asign') &&
+                                {actions.hasPermission('admin.role-permission.asign') &&
                                 <button 
                                     type="button"
                                     onClick={()=>{

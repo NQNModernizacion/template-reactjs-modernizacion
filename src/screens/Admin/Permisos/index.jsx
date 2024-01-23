@@ -26,7 +26,7 @@ export default function Permisos() {
     })
 
     useEffect(() => {
-        if (!actions.hasPermission('permission.view')) {
+        if (!actions.hasPermission('admin.permission.view') && !actions.isAdmin()) {
             if (actions.hasRole('admin')) {
                 navigate('/administrador/roles-permisos')
             } else {
@@ -77,7 +77,7 @@ export default function Permisos() {
                                         data={dataTablePermisos(permisos.data, listado, setListado, persona, actions)}
                                         render={() => (
                                             <div className="d-flex justify-content-end w-100">
-                                                {actions.hasPermission('permission.asign') && <button
+                                                {actions.hasPermission('admin.permission.asign') && <button
                                                     type="button"
                                                     className="btn btn-sm btn-primary my-auto mx-3"
                                                     onClick={() => {
