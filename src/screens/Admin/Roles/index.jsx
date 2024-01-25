@@ -61,10 +61,10 @@ export default function Roles() {
     }, [persona.data])
 
     useEffect(() => {
-        if (actions.hasPermission('admin.role.view')) {
+        if (actions.hasPermission('admin.role.view') && actions.isAdmin()) {
             getRoles(roles, setRoles);
         } else {
-            if (actions.hasRole('admin')) {
+            if (actions.isAdmin()) {
                 navigate('/administrador/roles-permisos')
             } else {
                 navigate('/');
@@ -125,8 +125,6 @@ export default function Roles() {
                                                     label={'Roles sin Asignar'}
                                                     onChange={(e) => {
                                                         setListado({...listado, roles_select_asign: e })
-                                                        //console.log(listado.roles_no_asign)
-                                                        //console.log(listado.roles_select_asign)
                                                     }}
                                                     noData={() => { return 'No hay mas Roles' }}
                                                     placeholder={'Buscar Roles...'}
@@ -153,8 +151,6 @@ export default function Roles() {
                                                     label={'Roles a Desasignar'}
                                                     onChange={(e) => {
                                                         setListado({...listado, roles_select_no_asign: e })
-                                                        //console.log(listado.roles_asign)
-                                                        //console.log(listado.roles_select_no_asign)
                                                     }}
                                                     noData={() => { return 'No hay mas Roles' }}
                                                     placeholder={'Buscar Roles...'}

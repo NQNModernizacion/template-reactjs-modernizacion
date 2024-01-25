@@ -10,7 +10,7 @@ export default function Admin(){
     const navigate = useNavigate();
 
     useEffect(()=>{
-        if(!actions.hasRole('admin')){
+        if(!(actions.isAdmin())){
             navigate('/')
             toast.error('No posee permisos para ingresar a esa sección', toastOptions);
         }
@@ -23,6 +23,7 @@ export default function Admin(){
             {actions.hasPermission('admin.permission.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/permisos">Permisos-Usuario</Link>}
             {actions.hasPermission('admin.role-permission.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/role-permisos">Roles-Permisos</Link>}
             {actions.hasPermission('admin.activity.log') && <Link className="btn btn-primary" to="/administrador/activity-log">Activity Log</Link>}
+            {actions.hasPermission('admin.users.view') && <Link className="btn btn-primary" to="/administrador/roles-permisos/usuarios">Usuarios</Link>}
             </div>
         </Container>
     )

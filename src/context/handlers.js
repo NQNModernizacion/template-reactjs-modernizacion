@@ -59,14 +59,33 @@ export const hasDirectPermission = (permission, user) => {
 
 export const isAdmin = (user) => {
   if (!user) return false;
-  return user.permissions?.some((p) => {
+  if (!user.permissions) return false;
+  if (!user.roles) return false;
+  let perms = user.permissions?.some((p) => {
     let name = p.name.split('.');
     if(name[0] === 'admin'){
       return true;
-    }else{
-      return false;
     }
   })
+
+  
+
+  const permissionsRoles = user.roles?.reduce((prev, curr) => {
+    prev.push(...curr.permissions);
+    return prev;
+  }, []);
+
+  let rolePerms =  permissionsRoles?.some((p) => {
+    let name = p.name.split('.');
+    if(name[0] === 'admin'){
+      return true;
+    }
+  });
+
+  if(perms || rolePerms){
+    return true;
+  }
+
 }
 
 export const reloadSesion = async (setStore) => {

@@ -26,8 +26,8 @@ export default function Permisos() {
     })
 
     useEffect(() => {
-        if (!actions.hasPermission('admin.permission.view') && !actions.isAdmin()) {
-            if (actions.hasRole('admin')) {
+        if (!(actions.hasPermission('admin.permission.view') && actions.isAdmin())) {
+            if (actions.isAdmin()) {
                 navigate('/administrador/roles-permisos')
             } else {
                 navigate('/');
@@ -81,7 +81,6 @@ export default function Permisos() {
                                                     type="button"
                                                     className="btn btn-sm btn-primary my-auto mx-3"
                                                     onClick={() => {
-                                                        //console.log(listado.permisos_select);
                                                         GuardarPermisos(persona, guardarPermisos, setGuardarPermisos, listado.permisos_select, permisos, setPermisos, listado, setListado)
                                                     }}
                                                     disabled={guardarPermisos.loading}

@@ -12,6 +12,7 @@ import Roles from '../Admin/Roles';
 import Permisos from '../Admin/Permisos';
 import RolesPermisos from '../Admin/RolesPermisos';
 import Actividad from '../Admin/Actividad';
+import Usuarios from '../Admin/Usuarios';
 
 const Main = () => {
     const { actions, loading } = useContext(UserContext);
@@ -31,6 +32,7 @@ const Main = () => {
                     <Route path="/administrador/roles-permisos/permisos" element={<Permisos/>}/>
                     <Route path="/administrador/roles-permisos/role-permisos" element={<RolesPermisos/>}/>
                     <Route path="/administrador/activity-log" element={<Actividad/>}/>
+                    <Route path="/administrador/roles-permisos/usuarios" element={<Usuarios/>}/>
                     <Route path="*" element={'404 - HAY QUE DEFINIR'} />
                 </Route>
                 <Route path="/login" element={<Login />} />

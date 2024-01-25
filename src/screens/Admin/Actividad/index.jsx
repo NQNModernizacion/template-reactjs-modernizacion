@@ -17,17 +17,9 @@ export default function Actividad() {
 
     const [data, setData] = useState(null);
 
-    /* useEffect(() => {
-        if (!actions.hasRole('admin') && !actions.hasPermission('activity.log')) {
-            navigate('/')
-        } else {
-            getActivity(actividad, setActividad)
-        }
-    }, []) */
-
     useEffect(() => {
-      if (!actions.hasPermission('admin.activity.log') && !actions.isAdmin()) {
-          if (actions.hasRole('admin')) {
+      if (!(actions.hasPermission('admin.activity.log') && actions.isAdmin())) {
+          if (actions.isAdmin()) {
               navigate('/administrador/roles-permisos')
           } else {
               navigate('/');
