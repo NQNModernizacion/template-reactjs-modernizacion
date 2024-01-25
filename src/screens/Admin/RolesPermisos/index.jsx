@@ -25,7 +25,7 @@ export default function RolesPermisos() {
     })
 
     useEffect(() => {
-        if (!(actions.hasPermission('admin.role-permission.view' && actions.isAdmin()))) {
+        if (!(actions.hasPermission('admin.role-permission.view') && actions.isAdmin())) {
             if (actions.isAdmin()) {
                 navigate('/administrador/roles-permisos')
             } else {
