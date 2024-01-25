@@ -86,7 +86,6 @@ export default function RolesPermisos() {
                                 <button 
                                     type="button"
                                     onClick={()=>{
-                                        //console.log(rol.permisos_rol);
                                         guardarPermisos(guardar, setGuardar, rol);
                                     }}
                                     disabled={guardar.loading}

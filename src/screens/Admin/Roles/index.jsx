@@ -57,7 +57,6 @@ export default function Roles() {
                 }
             })
         }
-        console.log(listado);
     }, [persona.data])
 
     useEffect(() => {

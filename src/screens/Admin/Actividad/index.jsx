@@ -55,7 +55,6 @@ export default function Actividad() {
                     size={'md'}
                     title={()=>{return 'Atributos'}}
                     >
-                        {data && console.log(data)}
                         {data && data.old && 
                             <div className="p-3 rounded-2 env-box row">
                             <pre>

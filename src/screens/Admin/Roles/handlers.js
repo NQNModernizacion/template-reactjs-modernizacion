@@ -74,7 +74,6 @@ export const consultar_persona = async(persona, setPersona, setListado, listado)
         const {data, error} = response.data;
         if(data && !error){
             setPersona({...persona, loading:false, data:data});
-            //console.log(data);
         }
 
         if(!data && error){

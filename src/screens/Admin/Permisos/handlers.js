@@ -91,7 +91,6 @@ export const dataTablePermisos = (data, listado, setListado, persona, actions) =
         sorteable: false,
         hide: !actions.hasPermission('permission.asign'), 
         renderCell: (p) => {
-          //console.log(p)
             return <div className='d-flex justify-content-evenly w-100'>
                 <input 
                   type='checkbox' 
@@ -101,8 +100,6 @@ export const dataTablePermisos = (data, listado, setListado, persona, actions) =
                   defaultChecked={tiene_permiso(p.row.name, persona, listado, setListado)}
                   
                   onChange={(e)=>{
-                    //console.log(e.target.checked)
-                    //e.target.checked = e.target.checked
                     seleccionar(e, listado, setListado);}
                   }
                   ></input>
@@ -156,9 +153,6 @@ export const dataTablePermisos = (data, listado, setListado, persona, actions) =
         if(data && !error){
             setGuardarPermisos({...guardarPermisos, loading:false, data:data})
             toast.success('Permisos actualizados', toastOptions);
-            //setPermisos({...permisos, data:null});
-            //console.log(permisosSelect)
-            //getPermisos(permisos, setPermisos, listado, setListado, permisosSelect)
         }
 
         if(!data && error){

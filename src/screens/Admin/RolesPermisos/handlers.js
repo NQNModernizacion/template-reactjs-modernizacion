@@ -72,12 +72,10 @@ export const getPermisos = async(permisos, setPermisos)=>{
 const tiene_permiso = (nombre, permisosRol)=>{
     let tiene = false;
     permisosRol.map(item=>{
-        //console.log(item);
         if(item == nombre){
             tiene = true;
         }
     })
-    //console.log(tiene)
     return tiene;
 }
 
@@ -98,7 +96,6 @@ const asignarPermiso = (e, rol, setRol)=>{
 }
 
 export const dataTablePermisos = (data, permisosRol, actions, rol, setRol) => {
-    //console.log(permisosRol)
     const columns = [
       { field: "id", headerName: "Identificador", width: 10, flex: 0.5, hide:true},
       {
