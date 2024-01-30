@@ -39,7 +39,6 @@ export const UserWrapper = ({ children }) => {
         <UserContext.Provider value={{ store, actions, loading: store.loading }}>
             {children}
             <ToastContainer />
-            button
 
             <Modal
                 styles={{ header: { backgroundColor: "#1766ad", color: "white" } }}
