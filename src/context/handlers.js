@@ -1,29 +1,14 @@
 import { axios } from "../utils/axios";
-import { getSession, logout } from "../utils/auth/sessionStorage";
+import { getSession, logout } from "../utils/sessionStorage";
 
 export const getInitialState = () => {
-  const commonAttributes = {
+  const sesion = getSession();
+  return {
     loading: false,
     sesionModal: false,
+    user: sesion ? sesion : null,
     global_data: {},
   };
-
-  const sesion = getSession();
-  let initialState;
-
-  if (sesion) {
-    initialState = {
-      ...commonAttributes,
-      data: { ...sesion },
-    };
-  } else {
-    initialState = {
-      ...commonAttributes,
-      data: null,
-    };
-  }
-
-  return initialState;
 };
 
 /** Verifica si existe el rol en la coleccion del usuario */
@@ -69,8 +54,8 @@ export const reloadSesion = async (setStore) => {
       ...store,
       loading: false,
       sesionModal: false,
-      data: {
-        ...store.data,
+      user: {
+        ...store.user,
         ...data,
       },
     }));
@@ -78,5 +63,81 @@ export const reloadSesion = async (setStore) => {
 
   if (error) {
     logout();
+  }
+};
+
+/**
+ * setea de forma pseudo-dinamica un valor de global data
+ * @param store - The store object
+ * @param setStore - This is the function that will be used to set the state of the store.
+ * @param data - The data that you want to set
+ * @param index - the index of the data you want to set
+ */
+export const setIndexInGlobal = (setStore, data, index) => {
+  setStore((store) => {
+    let newData = [...data];
+
+    if (index in store.global_data) {
+      newData = [...store.global_data[index]];
+      newData.push(...data);
+
+      newData = newData.filter((item, index, self) => {
+        return self.findIndex((element) => element.id === item.id) === index;
+      });
+
+      newData = newData.sort((a, b) => b.id - a.id);
+    }
+
+    return {
+      ...store,
+      global_data: {
+        ...store.global_data,
+        [index]: newData,
+      },
+    };
+  });
+};
+
+export const setGlobalData = (setStore, data) => {
+  setStore((store) => ({
+    ...store,
+    global_data: {
+      ...store.global_data,
+      ...data,
+    },
+  }));
+};
+
+export const addGlobalValue = (store, setStore, index, value) => {
+  const values = store.global_data[index] ? [...store.global_data[index]] : [];
+
+  values.push(value);
+
+  setStore((s) => ({
+    ...s,
+    global_data: {
+      ...s.global_data,
+      [index]: [...values],
+    },
+  }));
+};
+
+export const updateGlobalValue = (store, setStore, index, value) => {
+  if (store.global_data[index]) {
+    const newValues = store.global_data[index].map((val) => {
+      if (val.id === value.id) {
+        return value;
+      } else {
+        return val;
+      }
+    });
+
+    setStore((s) => ({
+      ...s,
+      global_data: {
+        ...s.global_data,
+        [index]: [...newValues],
+      },
+    }));
   }
 };

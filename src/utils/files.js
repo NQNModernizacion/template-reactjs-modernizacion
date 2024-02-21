@@ -1,4 +1,4 @@
-import { isObjEmpty } from ".";
+import { isObjEmpty } from "../config";
 
 export const getArrayFiles = (files) => {
   const keysArray = Object.keys(files);

@@ -1,9 +1,7 @@
 import { default as a } from "axios";
 
-import { getToken, logout } from "../../utils/auth/sessionStorage";
-import { URL_BACK, WEBLOGIN_URL } from "../../utils/config";
-
-export const validateStatus = (status) => true;
+import { URL_BACK, WEBLOGIN_URL } from "../config";
+import { getToken, logout } from "./sessionStorage";
 
 export const axios = (token = getToken()) => {
   a.defaults.baseURL = URL_BACK;
@@ -16,6 +14,9 @@ export const axios = (token = getToken()) => {
         window.location.href = WEBLOGIN_URL;
         break;
       case 403:
+        logout();
+        break;
+      case 503:
         logout();
         break;
       default:

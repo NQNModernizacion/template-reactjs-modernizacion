@@ -1,12 +1,10 @@
-const OptionMenu = ({ sc, onClick, icon, title }) => (
-  <div className="col-12 text-center mb-3" data-menu={sc} onClick={onClick}>
-    <button className="btn btn-primary btn-menu" data-menu={sc} onClick={onClick}>
-      <div className="d-flex" data-menu={sc} onClick={onClick}>
-        {icon && icon()}
-        {title}
-      </div>
-    </button>
-  </div>
+import { Link } from "react-router-dom";
+
+const OptionMenu = ({ to, icon, title }) => (
+  <Link to={to} className="btn btn-primary col-12 text-center mb-3 d-flex">
+    {icon && icon()}
+    {title}
+  </Link>
 );
 
 export default OptionMenu;

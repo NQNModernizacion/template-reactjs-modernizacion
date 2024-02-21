@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
-import { Layout } from "./components";
+import * as Layouts from "./Layouts";
 import { UserContext } from "./context";
 import { initApp, showSpinner } from "./handlers";
 import { Login, Menu } from "./screens";
@@ -19,9 +19,8 @@ const App = () => {
   return (
     <HashRouter>
       <Routes>
-        <Route element={<Layout perfil={actions.getPerfil()} />}>
+        <Route element={<Layouts.UserLayout />}>
           <Route path="/" element={<Menu />} />
-
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="/login" element={<Login />} />

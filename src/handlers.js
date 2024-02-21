@@ -1,15 +1,13 @@
-import { getSession, isValidSession } from "./utils/auth/sessionStorage";
+import { getSession, isValidSession } from "./utils/sessionStorage";
 import { axios } from "./utils/axios";
 import { getParams, removeURLParameter } from "./utils/common";
 
-export const initApp = async (actions) => {
+export const initApp = async (ua) => {
   const token = getParams().token;
-  const windowLocation = window.location;
-  // console.log(getSession())
 
   if (!token) {
     if (isValidSession()) {
-      actions.setUser({ ...getSession() });
+      ua.setUser({ ...getSession() });
     } else {
       // retornamos a weblogin o al internal login
     }
@@ -18,7 +16,7 @@ export const initApp = async (actions) => {
     const { data, error } = resp.data;
 
     if (data) {
-      actions.setUser({ ...data, token });
+      ua.setUser({ ...data, token: data.token });
     }
 
     if (error) {
@@ -26,34 +24,9 @@ export const initApp = async (actions) => {
       console.log("ocurrio un error al iniciar la app", error);
     }
 
-    const url = removeURLParameter(windowLocation.href, "token");
-    //window.location.href = removeURLParameter(windowLocation.href, 'token')
+    const url = removeURLParameter(window.location.href, "token");
     window.history.pushState({}, null, url);
   }
-};
-
-/** Definimos el rol del usuario en funcion del perfil en wapUsuariosPerfiles */
-export const getArrayRoles = (userProfiles) => {
-  if (!userProfiles) return "user";
-
-  return userProfiles.split(",").map((id) => {
-    switch (id) {
-      case "1":
-        return "PERMISO_1";
-
-      default:
-        return "user";
-    }
-  });
-};
-
-export const handlerBackToMenu = (state, setState) => {
-  setState({
-    ...state,
-    view: {
-      menu: null,
-    },
-  });
 };
 
 /** Enviamos un bool para mostrar el spinner principal */

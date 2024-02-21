@@ -1,54 +1,45 @@
-import React, { useContext } from "react";
-import { Box, Skeleton, Typography } from "@mui/material";
-import { MenuBox } from "../../components";
-import { navItems } from "./Items";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context";
 
 const Menu = () => {
-  const { actions, loading } = useContext(UserContext);
+  const { actions: ua } = useContext(UserContext);
+
+  const nav = useNavigate();
+
+  const permisos = ua.user().permissions;
+  const permisosOrigen = permisos.filter((permiso) => permiso.name.startsWith("origen."));
 
   return (
-    <div className="bg-body rounded p-3">
-      {/* <Header title={'Menú Principal'} /> */}
-      <Box mb="30px" display="grid" gridTemplateColumns="repeat(12, 1fr)" sx={{ height: "auto" }}>
-        <Box gridColumn="span 12" sx={{ backgroundColor: "#1365ae", textAlign: "center" }}>
-          <Typography
-            variant="h2"
-            sx={{
-              marginTop: "6px",
-              color: "#FFF",
-              textTransform: "uppercase",
-              fontWeight: "bold",
-              fontSize: "2rem",
-            }}
-          >
-            Servicios
-          </Typography>
-        </Box>
-      </Box>
-
-      <div className="container">
-        <div
-          className="card-body d-grid gap-1"
-          style={{ gridTemplateColumns: "repeat(auto-fill, 160px)", justifyContent: "center" }}
-        >
-          {navItems.map(({ text, icon, to, permission }, key) => {
-            {
-              /* if (!actions.hasPermission(permission)) {
-                return "";
-              } */
-            }
-
+    <div className="container_menu p-3 rounded">
+      <div className="bg-body p-3 rounded">
+        <h2 className="text-center m-0">Menú Principal</h2>
+        <hr />
+        <div className="d-grid gap-2 col-8 mx-auto justify-content-center">
+          {/* Botones para ver certificados segun permisos de origen */}
+          {permisosOrigen.map((permiso) => {
+            const nombreOrigen = permiso.name.split(".")[1];
             return (
-              <React.Fragment key={key}>
-                <MenuBox title={text} image={icon} to={to} />
-              </React.Fragment>
+              <button
+                className="btn btn-primary w-100 btn-menu"
+                onClick={() => nav(`/certificados/${nombreOrigen}`)}
+                hidden={!ua.hasPermission(permiso.name)}
+                key={permiso.name}
+              >
+                {nombreOrigen.toUpperCase()}
+              </button>
             );
           })}
 
-          {loading && <Skeleton className="skeleton-appcard" variant="rounded" />}
-
-          {loading && <Skeleton className="skeleton-appcard" variant="rounded" />}
+          <button className="btn btn-primary w-100 btn-menu" onClick={() => nav("/origenes")}>
+            Origenes
+          </button>
+          <button
+            className="btn btn-primary w-100  btn-menu"
+            onClick={() => nav("/administracion")}
+          >
+            Administración
+          </button>
         </div>
       </div>
     </div>

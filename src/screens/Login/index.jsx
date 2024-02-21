@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context";
 import { handleLogin } from "./handlers";
-import { isValidSession } from "../../utils/auth/sessionStorage";
 import { Input } from "../../components";
+import { isValidSession } from "../../utils/sessionStorage";
 
 const Login = () => {
   const { actions: ua, loading } = useContext(UserContext);
@@ -20,8 +20,8 @@ const Login = () => {
   const login = (e) => handleLogin(e, ua, form, nav);
 
   return (
-    <div className="container mt-5">
-      <div className="offset-md-3 col-md-6 offset-sm-1 col-sm-10 bg-body rounded p-2">
+    <div className="container pt-5">
+      <div className="offset-md-3 col-md-6 offset-sm-1 col-sm-10 bg-body rounded p-2 my-auto">
         <form onSubmit={login} className="p-4">
           <h3>Ingresar al sistema</h3>
           <hr />

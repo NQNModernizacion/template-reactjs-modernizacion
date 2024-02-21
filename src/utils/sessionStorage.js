@@ -1,4 +1,4 @@
-import { axios } from "../axios";
+import { axios } from "./axios";
 import { APP_NAME, WEBLOGIN_URL } from "../config";
 
 const KEY = window.location.origin + "/" + APP_NAME;
