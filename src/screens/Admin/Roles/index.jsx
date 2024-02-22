@@ -1,175 +1,249 @@
-import { 
-    getRoles, 
-    consultar_persona, 
-    ver_role_en_persona,
-    roles_string,
-    asignarRol,
-    desasignarRol 
-} from "./handlers"
-import { useState, useEffect, useContext } from "react"
-import { UserContext } from "../../../context"
-import { useNavigate } from "react-router-dom";
-import { Container, SelectSearch } from "../../../components";
-import { Tabs, Tab } from 'react-bootstrap'
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Container, SelectSearch } from '../../../components'
+import { UserContext } from '../../../context'
+import { asignarRol, consultar_persona, desasignarRol, getRoles, ver_role_en_persona } from './handlers'
 
 export default function Roles() {
-    const { actions } = useContext(UserContext);
-    const navigate = useNavigate();
-    const [roles, setRoles] = useState({
-        data: null, error: null, loading: false
-    })
+  const { actions } = useContext(UserContext)
+  const navigate = useNavigate()
+  const [selectedAction, setSelectedAction] = useState('')
+  const [roles, setRoles] = useState({
+    data: null,
+    error: null,
+    loading: false,
+  })
 
-    const [persona, setPersona] = useState({
-        data: null, error: null, loading: false, values: {
-            data: ''
-        }
-    })
+  const [persona, setPersona] = useState({
+    data: null,
+    error: null,
+    loading: false,
+    values: {
+      data: '',
+    },
+  })
 
-    const [listado, setListado] = useState({
-        roles: [], roles_asign: [], roles_no_asign: [], roles_select_asign: [], roles_select_no_asign: []
-    })
+  const [listado, setListado] = useState({
+    roles: [],
+    roles_asign: [],
+    roles_no_asign: [],
+    roles_select_asign: [],
+    roles_select_no_asign: [],
+  })
 
-    const [guardarRol, setGuardarRol] = useState({
-        data:null, error:null, loading:false
-    })
+  const [guardarRol, setGuardarRol] = useState({
+    data: null,
+    error: null,
+    loading: false,
+  })
 
-    useEffect(() => {
-        if (roles.data != null) {
-            setListado({ ...listado, roles: roles.data });
-        }
-    }, [roles.data])
+  const handleActionSelection = (action) => {
+    setSelectedAction(action)
+  }
 
-    useEffect(() => {
-        if (persona.data != null && roles.data != null) {
-            roles.data.map((item, index) => {
-                if (ver_role_en_persona(item, persona)) {
-                    let roles_asign = listado.roles_asign;
-                    let it = item;
-                    it.label = it.name;
-                    roles_asign.push(it);
-                    setListado({ ...listado, roles_asign: roles_asign });
-                } else {
-                    let roles_no_asign = listado.roles_no_asign;
-                    let it = item;
-                    it.label = it.name;
-                    roles_no_asign.push(it);
-                    setListado({ ...listado, roles_no_asign: roles_no_asign });
-                }
-            })
-        }
-    }, [persona.data])
+  useEffect(() => {
+    if (roles.data != null) {
+      setListado({ ...listado, roles: roles.data })
+    }
+  }, [roles.data])
 
-    useEffect(() => {
-        if (actions.hasPermission('admin.role.view') && actions.isAdmin()) {
-            getRoles(roles, setRoles);
+  useEffect(() => {
+    if (persona.data != null && roles.data != null) {
+      roles.data.map((item, index) => {
+        if (ver_role_en_persona(item, persona)) {
+          let roles_asign = listado.roles_asign
+          let it = item
+
+          it.label = it.name
+          roles_asign.push(it)
+          setListado({ ...listado, roles_asign: roles_asign })
         } else {
-            if (actions.isAdmin()) {
-                navigate('/administrador/roles-permisos')
-            } else {
-                navigate('/');
-            }
+          let roles_no_asign = listado.roles_no_asign
+          let it = item
+
+          it.label = it.name
+          roles_no_asign.push(it)
+          setListado({ ...listado, roles_no_asign: roles_no_asign })
         }
-    }, [])
+      })
+    }
+  }, [persona.data])
 
-    return (
-        <Container linkBack={'/administrador/roles-permisos'} titulo={'Administración de Roles'}>
-            {roles.loading && roles.data === null && <div className='d-flex justify-content-center'>
-                <div className='spinner-border text-primary' role='status'>
-                </div>
-            </div>}
-            {roles.data &&
-                <form onSubmit={(e) => {e.preventDefault(); consultar_persona(persona, setPersona, setListado, listado)}}>
-                    <label className="form-label">Ingrese DNI, ID o Email</label>
-                    <div className="d-flex justify-content-between gap-2">
-                        <input
-                            type="text"
-                            value={persona.values.data}
-                            onChange={(e) => {
-                                setPersona({ ...persona, values: { data: e.target.value } })
-                            }}
-                            className="form-control"
-                        />
-                        <button
-                            type="submit"
-                            className="btn btn-sm btn-primary"
-                            disabled={persona.loading} >
-                            <span>Buscar</span>
-                        </button>
+  useEffect(() => {
+    if (actions.hasPermission('admin.role.view') && actions.isAdmin()) {
+      getRoles(roles, setRoles)
+    } else {
+      if (actions.isAdmin()) {
+        navigate('/administrador/roles-permisos')
+      } else {
+        navigate('/')
+      }
+    }
+  }, [])
+
+  return (
+    <Container linkBack={'/'} titulo={'Administración de Roles'}>
+      {roles.loading && roles.data === null && (
+        <div className='d-flex justify-content-center'>
+          <div className='spinner-border text-primary' role='status' />
+        </div>
+      )}
+      {roles.data && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            consultar_persona(persona, setPersona, setListado, listado)
+          }}
+        >
+          <label className='form-label'>Ingrese DNI, ID o Email</label>
+          <div className='d-flex justify-content-between gap-2'>
+            <input
+              className='form-control'
+              type='text'
+              value={persona.values.data}
+              onChange={(e) => {
+                setPersona({ ...persona, values: { data: e.target.value } })
+              }}
+            />
+            <button className='btn btn-primary' disabled={persona.loading} type='submit'>
+              <span>Buscar</span>
+            </button>
+          </div>
+          {persona.loading && (
+            <div className='d-flex justify-content-center mt-3'>
+              <div className='spinner-border text-primary' role='status' />
+            </div>
+          )}
+          {persona.data && (
+            <div className='mt-2'>
+              <div className='card mb-2 shadow'>
+                <div className='row g-0 align-items-center'>
+                  <div className='col-12'>
+                    <div className='card-body'>
+                      <div className='row'>
+                        <h5 className='card-title'>
+                          <i className='bi bi-person-fill text-primary' /> {persona.data.user.nombre}
+                        </h5>
+                        <h6 className='card-subtitle mb-2 text-body-secondary'>
+                          Correo: {persona.data.user.correoElectronico}
+                        </h6>
+                        <h6 className='card-subtitle mb-2 text-body-secondary'>
+                          Documento: {persona.data.user.documento}
+                        </h6>
+                        <h6 className='card-subtitle mb-4 text-body-secondary'>
+                          ¿Ha entrado a la aplicación?: {persona.data.in_app ? 'Sí' : 'No'}
+                        </h6>
+                        <h6 className='card-subtitle mb-2 text-body-secondary'>Roles:</h6>
+                        <div className='d-flex flex-wrap gap-2'>
+                          {persona.data.roles.length > 0 && (
+                            <>
+                              {persona.data.roles.map((rol, index) => {
+                                return (
+                                  <span key={index} className='badge text-bg-primary'>
+                                    {rol.name}
+                                  </span>
+                                )
+                              })}
+                            </>
+                          )}
+                          {persona.data.roles.length === 0 && (
+                            <h6 className='card-subtitle mb-2 text-body-secondary'>No posee roles</h6>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    {persona.loading && <div className='d-flex justify-content-center mt-3'>
-                        <div className='spinner-border text-primary' role='status'>
-                        </div>
-                    </div>}
-                    {persona.data &&
-                        <div className="mt-2">
-                            <label className="form-control mt-2">Nombre: {persona.data.user.nombre}</label>
-                            <label className="form-control mt-2">Correo: {persona.data.user.correoElectronico}</label>
-                            <label className="form-control mt-2">Documento: {persona.data.user.documento}</label>
-                            <label className="form-control mt-2">¿Ha entrado a la aplicación?: {persona.data.in_app ? 'Si' : 'No'}</label>
-                            {persona.data.roles.length > 0 ?
-                                <label className="form-control mt-2">Roles: {roles_string(persona.data.roles)}</label>
-                                :
-                                <label className="form-control mt-2">No posee roles</label>
-                            }
-                            {/* tabs de asignar y de desasignar rol */}
-                            <Tabs defaultActiveKey='asignar' className='mt-3' fill>
-                                <Tab eventKey='asignar' title='Asignar Rol'>
-                                    <div className="mx-3">
-                                        {listado.roles_no_asign.length > 0 &&
-                                                <SelectSearch
-                                                    value={listado.roles_select_asign}
-                                                    key={'asignar'}
-                                                    isMulti={true}
-                                                    options={listado.roles_no_asign}
-                                                    label={'Roles sin Asignar'}
-                                                    onChange={(e) => {
-                                                        setListado({...listado, roles_select_asign: e })
-                                                    }}
-                                                    noData={() => { return 'No hay mas Roles' }}
-                                                    placeholder={'Buscar Roles...'}
-                                                ></SelectSearch>  
-                                        }
-                                        {actions.hasPermission('admin.role.asign') &&                                            
-                                            <button 
-                                                type="button" 
-                                                className="btn btn-sm btn-primary" 
-                                                onClick={() => { asignarRol(listado, setListado, persona, setPersona, guardarRol, setGuardarRol) }}
-                                                disabled={guardarRol.loading}
-                                            >Asignar Roles seleccionados</button>}
-                                    </div>
-                                </Tab>
-                                <Tab eventKey='desasignar' title='Desasignar Rol'>
-                                <div className="mx-3">
-                                        {listado.roles_asign.length > 0 &&
-                                        
-                                                <SelectSearch
-                                                    value={listado.roles_select_no_asign}
-                                                    key={'desasignar'}
-                                                    isMulti={true}
-                                                    options={listado.roles_asign}
-                                                    label={'Roles a Desasignar'}
-                                                    onChange={(e) => {
-                                                        setListado({...listado, roles_select_no_asign: e })
-                                                    }}
-                                                    noData={() => { return 'No hay mas Roles' }}
-                                                    placeholder={'Buscar Roles...'}
-                                                ></SelectSearch>    
-                                        }
-                                        {actions.hasPermission('admin.role.asign') &&                                            
-                                            <button 
-                                                type="button" 
-                                                className="btn btn-sm btn-primary" 
-                                                onClick={() => { desasignarRol(listado, setListado, persona, setPersona, guardarRol, setGuardarRol) }}
-                                                disabled={guardarRol.loading}
-                                            >Desasignar Roles seleccionados</button>}
-                                    </div>
-                                </Tab>
-                            </Tabs>
-                        </div>
-                    }
-                </form>
-            }
+                  </div>
+                </div>
+              </div>
 
-        </Container>
-    )
+              <div className='row d-flex justify-content-center my-2'>
+                <div aria-label='Basic example' className='btn-group' role='group'>
+                  <button
+                    className={`btn btn-outline-primary ${selectedAction === 'asignar-rol' && 'active'}`}
+                    type='button'
+                    onClick={() => handleActionSelection('asignar-rol')}
+                  >
+                    Asignar Rol
+                  </button>
+                  <button
+                    className={`btn btn-outline-primary ${selectedAction === 'desasignar-rol' && 'active'}`}
+                    type='button'
+                    onClick={() => handleActionSelection('desasignar-rol')}
+                  >
+                    Desasignar Rol
+                  </button>
+                </div>
+              </div>
+
+              {selectedAction === 'asignar-rol' && (
+                <div className='mx-3'>
+                  {listado.roles_no_asign.length > 0 && (
+                    <SelectSearch
+                      key={'asignar'}
+                      isMulti={true}
+                      label={'Roles sin Asignar'}
+                      noData={() => {
+                        return 'No hay mas Roles'
+                      }}
+                      options={listado.roles_no_asign}
+                      placeholder={'Buscar Roles...'}
+                      value={listado.roles_select_asign}
+                      onChange={(e) => {
+                        setListado({ ...listado, roles_select_asign: e })
+                      }}
+                    />
+                  )}
+                  {actions.hasPermission('admin.role.asign') && (
+                    <button
+                      className='btn btn-primary'
+                      disabled={guardarRol.loading}
+                      type='button'
+                      onClick={() => {
+                        asignarRol(listado, setListado, persona, setPersona, guardarRol, setGuardarRol)
+                      }}
+                    >
+                      Asignar Roles seleccionados
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {selectedAction === 'desasignar-rol' && (
+                <div className='mx-3'>
+                  {listado.roles_asign.length > 0 && (
+                    <SelectSearch
+                      key={'desasignar'}
+                      isMulti={true}
+                      label={'Roles a Desasignar'}
+                      noData={() => {
+                        return 'No hay mas Roles'
+                      }}
+                      options={listado.roles_asign}
+                      placeholder={'Buscar Roles...'}
+                      value={listado.roles_select_no_asign}
+                      onChange={(e) => {
+                        setListado({ ...listado, roles_select_no_asign: e })
+                      }}
+                    />
+                  )}
+                  {actions.hasPermission('admin.role.asign') && (
+                    <button
+                      className='btn btn-primary'
+                      disabled={guardarRol.loading}
+                      type='button'
+                      onClick={() => {
+                        desasignarRol(listado, setListado, persona, setPersona, guardarRol, setGuardarRol)
+                      }}
+                    >
+                      Desasignar Roles seleccionados
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </form>
+      )}
+    </Container>
+  )
 }
