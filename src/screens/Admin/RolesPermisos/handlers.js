@@ -104,7 +104,7 @@ export const dataTablePermisos = (data, permisosRol, actions, rol, setRol) => {
         width: 50,
         flex: 0.2,
         sorteable: false,
-        hide: !actions.hasPermission('role-permission.asign'),
+        hide: !actions.hasPermission('admin.role-permission.asign'),
         renderCell: (p) => {
             return <div className='d-flex justify-content-evenly w-100'>
                 <input 

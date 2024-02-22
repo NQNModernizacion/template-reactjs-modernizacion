@@ -89,7 +89,7 @@ export const dataTablePermisos = (data, listado, setListado, persona, actions) =
         width: 50,
         flex: 0.2,
         sorteable: false,
-        hide: !actions.hasPermission('permission.asign'), 
+        hide: !actions.hasPermission('admin.permission.asign'), 
         renderCell: (p) => {
             return <div className='d-flex justify-content-evenly w-100'>
                 <input 
