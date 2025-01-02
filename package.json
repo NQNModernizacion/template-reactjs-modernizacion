@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "env-cmd -f .env.production npm run lint:fix && npm run format && vite build",
-    "build:replica": "env-cmd -f .env.replica npm run lint:fix && npm run format && vite build",
+    "build": "env-cmd -f .env.production vite build",
+    "build:replica": "env-cmd -f .env.replica vite build",
     "preview": "vite preview",
     "test": "jest --watchAll",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,json}\" ",
@@ -22,6 +22,7 @@
     "@mui/x-data-grid": "^6.11.2",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
+    "env-cmd": "^10.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
