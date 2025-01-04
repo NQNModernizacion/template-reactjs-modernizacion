@@ -1,39 +1,32 @@
-#root {
-  margin-top: 3%;
-}
-
 body {
-  background-attachment: fixed !important;
-}
-
-main {
-  height: 100dvh;
+    background-attachment: fixed !important;
+    height: 100dvh;
 }
 
 .menu-box {
-  width: 160px;
-  height: 160px;
-  background-clip: content-box;
-  background-color: #3a8fda;
-  padding: 5px;
-  transition: 0.5s;
-  cursor: pointer;
-  text-align: center;
+    width: 160px;
+    height: 160px;
+    background-clip: content-box;
+    background-color: #3a8fda;
+    padding: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+    text-align: center;
 }
 
 .menu-box:hover {
-  border-radius: 0 20px 0 20px;
-  transform: scale(1.1);
+    border-radius: 0 20px 0 20px;
+    transform: scale(1.1);
 }
 
 .menu-box img {
-  width: 75px;
-  margin-bottom: 0.5rem;
+    width: 75px;
+    margin-bottom: 0.5rem;
 }
 
 .menu-box span {
-  color: white;
-  transition: 0.5s;
-  font-weight: bold;
-  font-size: 1rem;
+    color: white;
+    transition: 0.5s;
+    font-weight: bold;
+    font-size: 1rem;
 }
