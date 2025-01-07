@@ -1,4 +1,12 @@
-const CheckInline = ({ id, value, onChange, label, checked, disabled }) => {
+interface CheckInlineProps {
+  id: string;
+  value: string;
+  onChange: () => void;
+  label: string;
+  checked: boolean;
+  disabled: boolean;
+}
+const CheckInline: React.FC<CheckInlineProps> = ({ id, value, onChange, label, checked, disabled }) => {
   return (
     <>
       <div className="form-check">

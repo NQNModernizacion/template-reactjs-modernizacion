@@ -1,11 +1,24 @@
 import { Modal } from "..";
 
-const ModalConfirm = ({ object }) => {
+interface ModalConfirmProps {
+  object: {
+    show: boolean;
+    close: () => void;
+    title: string;
+    accept: () => void;
+    loading: boolean;
+    styles: React.CSSProperties;
+    body: React.ReactNode;
+  };
+}
+
+const ModalConfirm = ({ object }: ModalConfirmProps) => {
   return (
     <Modal
       size="sm"
       show={object.show}
-      setShow={object.close}
+      onHide={object.close}
+      // setShow={object.close}
       title={() => object.title}
       footer={() => (
         <>
@@ -23,7 +36,10 @@ const ModalConfirm = ({ object }) => {
           </div>
         </>
       )}
+      loading={object.loading}
+      // styles={object.styles}
     >
+      
       {object.body}
     </Modal>
   );

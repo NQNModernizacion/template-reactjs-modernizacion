@@ -1,4 +1,10 @@
-const Card = ({ title, children, style }) => {
+interface CardProps {
+  title?: () => React.ReactNode;
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}
+
+const Card: React.FC<CardProps> = ({ title, children, style }) => {
   return (
     <div className="card p-0 shadow" style={style}>
       {title && <div className="card-header">{title()}</div>}

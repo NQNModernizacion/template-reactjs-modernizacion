@@ -1,6 +1,22 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-const ModalPropio = ({
+//Modal sin bootstrap - con Tailwind
+
+interface ModalPropioProps {
+  size?: "sm" | "lg" | "xl";
+  show: boolean;
+  onHide: () => void;
+  title?: () => JSX.Element;
+  footer?: () => JSX.Element;
+  children: React.ReactNode;
+  loading?: boolean;
+  closeButton?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
+  animated?: boolean;
+}
+
+const ModalPropio: React.FC<ModalPropioProps> = ({
   size = "lg",
   show,
   onHide,
@@ -8,15 +24,15 @@ const ModalPropio = ({
   footer,
   children,
   loading = false,
-  closeButton = true,
+  // closeButton = true,
   onOpen = () => {},
   onClose = () => {},
-  animated = true,
+  // animated = true,
 }) => {
   useEffect(() => {
     if (show) {
       onOpen();
-      const handleKeyDown = (e) => {
+      const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") onHide();
       };
       window.addEventListener("keydown", handleKeyDown);
@@ -57,11 +73,12 @@ const ModalPropio = ({
         <div className="p-4">
           {children}
         </div>
-
+        
         {/* Footer */}
         {footer && (
           <div className="p-4 border-t border-gray-200 text-right bg-gray-50 rounded-b-lg">
             {footer()}
+            
           </div>
         )}
       </div>

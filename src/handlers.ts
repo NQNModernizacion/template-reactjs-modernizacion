@@ -30,7 +30,7 @@ export const initApp = async (ua: Actions) => {
         }
 
         const url = removeURLParameter(window.location.href, "token")
-        window.history.pushState({}, null, url)
+        window.history.pushState({}, '', url)
     }
     ua.setLoading(false)
 }
@@ -39,8 +39,10 @@ export const initApp = async (ua: Actions) => {
 export const showSpinner = (loading: boolean) => {
     if (MODE === "production") {
         if (loading) {
+            //@ts-ignore
             window.cargarSpinner()
         } else {
+            //@ts-ignore
             window.eliminarSpinner()
         }
     }

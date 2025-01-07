@@ -28,12 +28,14 @@ const Menu = () => {
 
     const nav = useNavigate();
 
+    interface Permiso {
+        name: string;
+    }
     const permisosOrigen = [
         // { name: "origen.prueba" },
         { name: "origen.login" },
     ];
-
-    const hasPermission = (permisoName) => {
+    const hasPermission = (permisoName: string): boolean => {
         return true;
     };
 
@@ -98,5 +100,8 @@ const Menu = () => {
 
         </BasicContainer>
     )
-
    
+
+}
+
+export default Menu;
