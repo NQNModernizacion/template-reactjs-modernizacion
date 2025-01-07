@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react"
 import { HashRouter, Route, Routes } from "react-router-dom"
 
-import {NotFound} from "./components"
+import { NotFound } from "./components"
 
 import { UserContext } from "./context/UserWrapper"
 
@@ -10,27 +10,17 @@ import * as S from "./screens"
 
 import { initApp } from "./handlers"
 
-import { toast } from 'react-toastify';
-import { toastOptions } from './config/toast';
-
 const App = () => {
-    
     const { actions } = useContext(UserContext)
 
-    
-    
     useEffect(() => {
-        
         initApp(actions)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    /* COMPLETAR */
-    // const NotFound = () => 404
     console.log(__DEV__)
 
     return (
-        
         <HashRouter>
             <Routes>
                 <Route element={<L.UserLayout />}>
@@ -47,6 +37,7 @@ const App = () => {
           <Route element={<ManagementUsuarios />} path="/administrador/roles-permisos/usuarios" />
  */}
                     {__DEV__ && (
+                        /* Esto solo se visualiza en desarrollo */
                         <Route path='/_viewcom' element={<S.DevScreen />} />
                     )}
 

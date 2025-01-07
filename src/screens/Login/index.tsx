@@ -11,14 +11,7 @@ import { postForm } from "../../api"
 import { setStorage } from "../../utils/localStorage"
 import { showSpinner } from "../../handlers"
 
-// import { toast } from 'react-toastify';
-// import { toastOptions } from '../../config/toast';
-
-
-
 const Login = () => {
-    //Prueba de toast
-    // toast.error('ahcbic', toastOptions);
     const { actions: ua, loading } = useContext(UserContext)
 
     const { register, handleSubmit, formState } = useForm({
@@ -34,15 +27,12 @@ const Login = () => {
             setStorage(data)
             /* nav(`/`) */
         }
-        
     }
 
     return (
         <div className='container pt-5'>
-            
             <div className='offset-md-3 col-md-6 offset-sm-1 col-sm-10 bg-white rounded my-auto shadow-lg'>
                 <div className='offset-md-2 col-md-6 offset-sm-1 col-sm-10'>
-
                     <img
                         alt='Logo Neuquén Capital'
                         height='80%'
@@ -51,51 +41,43 @@ const Login = () => {
                 </div>
 
                 <form onSubmit={handleSubmit(login)} className='p-3'>
-                
                     <h2 className='text-center mb-4'>Ingresar al sistema</h2>
                     <hr />
                     <Input
                         className={{
+                            container: "mb-3",
                             label: "form-label text-muted",
-                            input: "form-control form-control-lg shadow-sm",
+                            input: "form-control form-control shadow-sm",
                         }}
                         invalidMsg={formState.errors.email?.message}
                         label={"Correo electronico / DNI *"}
                         register={{ ...register("email") }}
-                        placeholder="usuario@gmail.com / 99.999.999"
+                        placeholder='usuario@gmail.com / 99.999.999'
                     />
                     <Input
                         className={{
                             label: "form-label text-muted",
-                            input: "form-control form-control-lg shadow-sm",
+                            input: "form-control form-control shadow-sm",
                         }}
                         invalidMsg={formState.errors.password?.message}
                         type='password'
                         label='Contraseña *'
                         register={{ ...register("password") }}
-                        placeholder="********"
+                        placeholder='********'
                     />
                     <div className='d-flex justify-content-center mt-3'>
                         <button
                             type='submit'
                             className='btn btn-primary w-100 py-2'
                             disabled={loading}
-                            style={{ fontSize: '1.1rem', fontWeight: '500' }}
+                            style={{ fontSize: "1.1rem", fontWeight: "500" }}
                         >
-                            {loading ? 'Cargando...' : 'Ingresar'}
+                            {loading ? "Cargando..." : "Ingresar"}
                         </button>
-                    </div>
-                    <div className='text-center mt-3'>
-                        <small className='text-muted'>
-                            ¿SE PUEDE RECUPERAR LA CONTRASEÑA? <a href='/'>Recuperarla</a>
-
-                        </small>
                     </div>
                 </form>
             </div>
-            
         </div>
-        
     )
 }
 
