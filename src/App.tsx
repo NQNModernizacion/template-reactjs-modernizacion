@@ -10,10 +10,17 @@ import * as S from "./screens"
 
 import { initApp } from "./handlers"
 
+import { toast } from 'react-toastify';
+import { toastOptions } from './config/toast';
+
 const App = () => {
+    
     const { actions } = useContext(UserContext)
 
+    
+    
     useEffect(() => {
+        
         initApp(actions)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -23,6 +30,7 @@ const App = () => {
     console.log(__DEV__)
 
     return (
+        
         <HashRouter>
             <Routes>
                 <Route element={<L.UserLayout />}>

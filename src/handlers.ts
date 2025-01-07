@@ -4,28 +4,34 @@ import { getParams, removeURLParameter } from "./utils/common"
 import { Actions } from "./interface"
 import { postForm } from "./api"
 import { MODE } from "./config"
+//Importar toast para las notificaciones
+import { toast } from 'react-toastify';
+import { toastOptions } from './config/toast';
 
 export const initApp = async (ua: Actions) => {
+    
     const token = getParams().token
+   
 
     if (!token) {
+       
         const data = await postForm("refresh", null, showSpinner)
         if (data) {
             ua.setStore(data)
             setStorage(data)
         }
-
         // retornamos a weblogin o al internal login
     } else {
         const resp = await axios(token).get("get_user_info")
         const { data, error } = resp.data
-
+      
         if (data) {
             ua.setUser({ ...data, token: data.token })
         }
 
         if (error) {
             // retornamos a weblogin o al internal login
+            toast.error(error, toastOptions);
             console.log("ocurrio un error al iniciar la app", error)
         }
 
@@ -41,9 +47,11 @@ export const showSpinner = (loading: boolean) => {
         if (loading) {
             //@ts-ignore
             window.cargarSpinner()
+       
         } else {
             //@ts-ignore
             window.eliminarSpinner()
+            
         }
     }
 }

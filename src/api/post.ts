@@ -15,10 +15,13 @@ export const postForm = async (
     const { data, error } = response.data
 
     if (data) {
+        // console.log("Data:", data)
         return data
+        
     }
 
     if (error) {
+        // console.log("Error:", error)
         toast.error(error, toastOptions)
         return null
     }

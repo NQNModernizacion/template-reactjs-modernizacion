@@ -11,7 +11,13 @@ import { postForm } from "../../api"
 import { setStorage } from "../../utils/localStorage"
 import { showSpinner } from "../../handlers"
 
+import { toast } from 'react-toastify';
+import { toastOptions } from '../../config/toast';
+
+
+
 const Login = () => {
+    toast.error('ahcbic', toastOptions);
     const { actions: ua, loading } = useContext(UserContext)
 
     const { register, handleSubmit, formState } = useForm({
@@ -27,20 +33,22 @@ const Login = () => {
             setStorage(data)
             /* nav(`/`) */
         }
+        
     }
 
     return (
         <div className='container pt-5'>
-            <div className='offset-md-3 col-md-6 offset-sm-1 col-sm-10 bg-white rounded my-auto shadow-lg'>
-           <div className='offset-md-2 col-md-6 offset-sm-1 col-sm-10'>
-
-           <img
-                    alt='Logo Neuquén Capital'
-                    height='80%'
-                    src='https://webservice.muninqn.gov.ar/cglobales/assets/banners/neuquen-2024.svg'
-                />
-           </div>
             
+            <div className='offset-md-3 col-md-6 offset-sm-1 col-sm-10 bg-white rounded my-auto shadow-lg'>
+                <div className='offset-md-2 col-md-6 offset-sm-1 col-sm-10'>
+
+                    <img
+                        alt='Logo Neuquén Capital'
+                        height='80%'
+                        src='https://webservice.muninqn.gov.ar/cglobales/assets/banners/neuquen-2024.svg'
+                    />
+                </div>
+
                 <form onSubmit={handleSubmit(login)} className='p-3'>
                 
                     <h2 className='text-center mb-4'>Ingresar al sistema</h2>
@@ -79,12 +87,14 @@ const Login = () => {
                     <div className='text-center mt-3'>
                         <small className='text-muted'>
                             ¿SE PUEDE RECUPERAR LA CONTRASEÑA? <a href='/'>Recuperarla</a>
-                
+
                         </small>
                     </div>
                 </form>
             </div>
+            
         </div>
+        
     )
 }
 
