@@ -9,3 +9,4 @@ export { default as ManagementRolesPermisos } from "./Management/RolesPermisos";
 export { default as ManagementUsuarios } from "./Management/Usuarios";
  */
 export { default as Menu } from "./Menu"
+export { default as PageExample } from "./PageExample"

@@ -32,7 +32,7 @@ const Menu = () => {
         name: string;
     }
     const permisosOrigen = [
-        // { name: "origen.prueba" },
+        { name: "origen.ejemplo" },
         { name: "origen.login" },
     ];
     const hasPermission = (permisoName: string): boolean => {
@@ -87,10 +87,16 @@ const Menu = () => {
                                 })}
                                 <button
                                     className='btn btn-primary w-100 btn-menu'
-                                    onClick={() => nav("/origenes")}
+                                    onClick={() => nav("/404vadarerror")}
                                 >
                                     404 notFound
                                 </button>
+                                {/* <button
+                                    className='btn btn-primary w-100 btn-menu'
+                                    onClick={() => nav("/PageExample")}
+                                >
+                                    prueba de container
+                                </button> */}
                             </div>
                         </div>
                     </div>
