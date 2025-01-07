@@ -1,7 +1,8 @@
-// import { ToastPosition } from 'react-toastify';
+import { ToastOptions, ToastPosition } from "react-toastify"
 
-export const toastOptions = {
+export const toastOptions: ToastOptions = {
     className: "toastContainer",
     progressClassName: "toastProgress",
-    // position: "top-right" as ToastPosition,
+    position: "bottom-right" as ToastPosition,
+    closeOnClick: true,
 }
