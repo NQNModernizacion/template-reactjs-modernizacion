@@ -11,13 +11,14 @@ import { postForm } from "../../api"
 import { setStorage } from "../../utils/localStorage"
 import { showSpinner } from "../../handlers"
 
-import { toast } from 'react-toastify';
-import { toastOptions } from '../../config/toast';
+// import { toast } from 'react-toastify';
+// import { toastOptions } from '../../config/toast';
 
 
 
 const Login = () => {
-    toast.error('ahcbic', toastOptions);
+    //Prueba de toast
+    // toast.error('ahcbic', toastOptions);
     const { actions: ua, loading } = useContext(UserContext)
 
     const { register, handleSubmit, formState } = useForm({
