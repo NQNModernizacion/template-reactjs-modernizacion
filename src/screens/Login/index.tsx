@@ -1,5 +1,5 @@
 import { useContext } from "react"
-/* import { useNavigate } from "react-router-dom" */
+import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 
@@ -18,14 +18,14 @@ const Login = () => {
         resolver: yupResolver(schema),
     })
 
-    /* const nav = useNavigate() */
+    const nav = useNavigate()
 
     const login = async (form: any) => {
         const data = await postForm("internal_login", form, showSpinner)
         if (data) {
-            ua.setStore(data)
             setStorage(data)
-            /* nav(`/`) */
+            ua.setStore(data)
+            nav(`/`)
         }
     }
 

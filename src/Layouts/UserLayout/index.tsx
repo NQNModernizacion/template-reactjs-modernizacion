@@ -1,17 +1,21 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
 
 import { logout } from "../../utils/localStorage"
 
 import { UserContext } from "../../context/UserWrapper"
-import { Settings, TicketIcon } from "lucide-react"
 
 const UserLayout: React.FC = () => {
-    const { actions } = useContext(UserContext)
+    const { actions: ua } = useContext(UserContext)
 
     const nav = useNavigate()
 
-    const perfil = actions.persona()
+    useEffect(() => {
+        ua.user() && nav("/login")
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const perfil = ua.persona()
 
     return (
         <>
@@ -29,20 +33,6 @@ const UserLayout: React.FC = () => {
                             className='imagen-usuario-navbar'
                             src={perfil.imagenUrl}
                         /> */}
-                        <button
-                            className='btn btn-primary btn-sm'
-                            onClick={() => nav("/tickets")}
-                        >
-                            <TicketIcon className='me-1' width={15} />
-                            Tickets
-                        </button>
-                        <button
-                            className='btn btn-primary btn-sm'
-                            onClick={() => nav("/configuraciones")}
-                        >
-                            <Settings className='me-1' width={15} />
-                            Configuraciones
-                        </button>
                         <div className='vr d-none d-sm-block'></div>
                         <div className='d-none d-sm-block text-start'>
                             <small className='nombre-usuario-navbar'>

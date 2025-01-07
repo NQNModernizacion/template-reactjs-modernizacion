@@ -3,8 +3,7 @@ import { axios } from "./utils/axios"
 import { getParams, removeURLParameter } from "./utils/common"
 import { Actions } from "./interface"
 import { postForm } from "./api"
-import { MODE } from "./config"
-//Importar toast para las notificaciones
+/* import { MODE } from "./config" */
 import { toast } from "react-toastify"
 import { toastOptions } from "./config/toast"
 
@@ -40,7 +39,7 @@ export const initApp = async (ua: Actions) => {
 
 /** Enviamos un bool para mostrar el spinner principal */
 export const showSpinner = (loading: boolean) => {
-    if (MODE === "production") {
+    if (/* MODE === "production" */ true) {
         if (loading) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-expect-error
