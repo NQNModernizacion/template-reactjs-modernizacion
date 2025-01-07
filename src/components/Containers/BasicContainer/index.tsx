@@ -17,7 +17,7 @@ const BasicContainer: RFC = ({ children, titulo /* , linkBack  */ }) => {
                             <NavigateBeforeOutlined /> Volver
                         </Link> */}
                     </div>
-                    {/* <hr className='m-0 mt-3' /> */}
+                    <hr className='m-0 mt-3' />
                     {titulo && (
                         <h3 className='col-12 text-center p-3 m-0 fs-4'>
                             {titulo}

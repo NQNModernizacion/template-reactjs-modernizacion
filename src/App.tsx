@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react"
 import { HashRouter, Route, Routes } from "react-router-dom"
 
+import {NotFound} from "./components"
+
 import { UserContext } from "./context/UserWrapper"
 
 import * as L from "./Layouts"
@@ -17,7 +19,7 @@ const App = () => {
     }, [])
 
     /* COMPLETAR */
-    const NotFound = () => 404
+    // const NotFound = () => 404
     console.log(__DEV__)
 
     return (

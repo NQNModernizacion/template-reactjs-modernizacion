@@ -15,3 +15,6 @@ export { default as OptionMenu } from "./OptionMenu"
 export { default as Select } from "./Select"
 export { default as SelectSearch } from "./SelectSearch"
 export { default as Table } from "./Table"
+
+export { default as NotFound } from "./NotFound"
+export { default as ModalPropio } from "./ModalPropio"
