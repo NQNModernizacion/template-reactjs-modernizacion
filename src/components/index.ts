@@ -4,6 +4,7 @@ export { default as CheckOpInline } from "./CheckOpInline"
 
 /* Contenedores: (sub) Layouts de la aplicacion */
 export { default as BasicContainer } from "./Containers/BasicContainer"
+export { default as ContainerSecundario } from "./Containers/ContainerSecundario"
 
 export { default as DetailLabel } from "./DetailLabel"
 

@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react"
 // import { NotFound } from "./components"
 
 import { UserContext } from "./context/UserWrapper"
-import  RouteProvider  from "./router/RouteProvider"
+import RouteProvider from "./router/RouteProvider"
 import { initApp } from "./handlers"
 
 const App = () => {
@@ -15,11 +15,7 @@ const App = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    console.log(__DEV__)
-
-    return (
-        <RouteProvider/>
-    )
+    return <RouteProvider />
 }
 
 export default App
