@@ -32,12 +32,14 @@ const Login = () => {
     return (
         <div className='container pt-5'>
             <div className='offset-md-3 col-md-6 offset-sm-1 col-sm-10 bg-white rounded my-auto shadow-lg'>
-                <div className='offset-md-2 col-md-6 offset-sm-1 col-sm-10'>
-                    <img
-                        alt='Logo Neuquén Capital'
-                        height='80%'
-                        src='https://webservice.muninqn.gov.ar/cglobales/assets/banners/neuquen-2024.svg'
-                    />
+                <div className='container pt-5 d-flex justify-content-center'>
+                    <div className='col-md-6 col-sm-10 text-center'>
+                        <img
+                            alt='Logo Neuquén Capital'
+                            className='img-fluid'
+                            src='https://webservice.muninqn.gov.ar/cglobales/assets/banners/neuquen-2024.svg'
+                        />
+                    </div>
                 </div>
 
                 <form onSubmit={handleSubmit(login)} className='p-3'>
