@@ -11,9 +11,9 @@ const UserLayout: React.FC = () => {
     const nav = useNavigate()
 
     useEffect(() => {
-        ua.user() && nav("/login")
+        !ua.token() && nav("/login")
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [ua.token()])
 
     const perfil = ua.persona()
 

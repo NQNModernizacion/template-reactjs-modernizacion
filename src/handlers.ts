@@ -1,39 +1,39 @@
-import { setStorage } from "./utils/localStorage"
-import { axios } from "./utils/axios"
+import { getStorage, setStorage } from "./utils/localStorage"
 import { getParams, removeURLParameter } from "./utils/common"
 import { Actions } from "./interface"
 import { postForm } from "./api"
 /* import { MODE } from "./config" */
-import { toast } from "react-toastify"
-import { toastOptions } from "./config/toast"
 
 export const initApp = async (ua: Actions) => {
+    ua.setLoading(true)
+
     const token = getParams().token
 
-    if (!token) {
-        const data = await postForm("refresh", null, showSpinner)
-        if (data) {
-            ua.setStore(data)
-            setStorage(data)
-        }
-        // retornamos a weblogin o al internal login
+    const storage = getStorage()
+
+    let method, config
+
+    if (storage?.token) {
+        method = "refresh_data"
+    } else if (token) {
+        method = "app_login"
+        config = { headers: { Authorization: "Bearer " + token } }
     } else {
-        const resp = await axios(token).get("get_user_info")
-        const { data, error } = resp.data
-
-        if (data) {
-            ua.setUser({ ...data, token: data.token })
-        }
-
-        if (error) {
-            // retornamos a weblogin o al internal login
-            toast.error(error, toastOptions)
-            console.log("ocurrio un error al iniciar la app", error)
-        }
-
-        const url = removeURLParameter(window.location.href, "token")
-        window.history.pushState({}, "", url)
+        /*  No hay token en storage,
+            No hay token por params
+        Lo mandamos a la pagina de la cudad */
     }
+
+    const data = await postForm("auth", { method }, null, config)
+    if (data) {
+        ua.setStore(data)
+        setStorage(data)
+        /* location.href = `/apps/${APP_NAME}/#/` */
+    }
+    /*  if (!data) {
+        location.href = `/apps/${APP_NAME}/#/login`
+    } */
+
     ua.setLoading(false)
 }
 

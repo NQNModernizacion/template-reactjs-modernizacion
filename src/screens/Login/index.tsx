@@ -21,7 +21,8 @@ const Login = () => {
     const nav = useNavigate()
 
     const login = async (form: any) => {
-        const data = await postForm("internal_login", form, showSpinner)
+        form.method = "internal"
+        const data = await postForm("auth", form, showSpinner)
         if (data) {
             setStorage(data)
             ua.setStore(data)
@@ -51,10 +52,10 @@ const Login = () => {
                             label: "form-label text-muted",
                             input: "form-control form-control shadow-sm",
                         }}
-                        invalidMsg={formState.errors.email?.message}
+                        invalidMsg={formState.errors._id?.message}
                         label={"Correo electronico / DNI *"}
-                        register={{ ...register("email") }}
-                        placeholder='usuario@gmail.com / 99.999.999'
+                        register={{ ...register("_id") }}
+                        placeholder='usuario@gmail.com / 99999999'
                     />
                     <Input
                         className={{

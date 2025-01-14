@@ -9,7 +9,7 @@ export const axios = (token = getToken()) => {
     a.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
     a.defaults.headers.post["Accept"] = "application/json"
     a.defaults.validateStatus = (status) => {
-        __DEV__ && console.log("Codigo: " + status)
+        //__DEV__ && console.log("Codigo: " + status)
 
         switch (status) {
             /*  case 450:
@@ -28,7 +28,7 @@ export const axios = (token = getToken()) => {
         return true
     }
 
-    if (__DEV__) {
+    /* if (__DEV__) {
         a.interceptors.request.use(
             (config) => {
                 console.log(
@@ -40,7 +40,7 @@ export const axios = (token = getToken()) => {
                 console.error("Error al iniciar la petición:", error)
             }
         )
-    }
+    } */
 
     return a
 }

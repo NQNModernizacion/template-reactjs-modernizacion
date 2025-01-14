@@ -4,7 +4,6 @@ import { toast } from "react-toastify"
 import { User } from "lucide-react"
 
 import { toastOptions } from "../../config/toast"
-import { customStyle, formatOption, formatOptions } from "../../utils/common"
 
 import {
     BasicContainer,
@@ -12,7 +11,6 @@ import {
     Input,
     Modal,
     MuniSpinner,
-    SelectSearch,
     Table,
     ContainerSecundario,
 } from "../../components"
@@ -39,6 +37,7 @@ const _DevScreen = () => {
     return (
         <>
             <BasicContainer>
+                <hr />
                 <div className='d-flex flex-wrap gap-1'>
                     <button className='btn btn-primary' onClick={showToast}>
                         Mostrar Toasts
@@ -82,19 +81,6 @@ const _DevScreen = () => {
                     }}
                     label='Input normal, sin el register de HookForm'
                     onChange={console.log}
-                />
-
-                <SelectSearch
-                    className={{
-                        container: "col-12 col-lg-4 mb-3",
-                    }}
-                    id='prioridad'
-                    value={formatOption(prioridades[3])}
-                    onChange={console.log}
-                    label='Prioridad *'
-                    customStyles={customStyle}
-                    invalidMsg={"Error"}
-                    options={formatOptions(prioridades)}
                 />
 
                 <Modal

@@ -1,12 +1,12 @@
 import { CSSProperties } from "react"
 import { BaseTable } from "../../interface"
 /** Ejemplo sacado de sistema-incidencias */
-
 export interface PrioridadTicketTable extends BaseTable {
     name: "prioridad_ticket"
     value: "0" | "1" | "2" | "3" | "4"
     styles: CSSProperties
 }
+
 /** Esta informacion se carga en el contexto dentro de appData ya se muestra el ejemplo de como manejar appData */
 export const prioridades: PrioridadTicketTable[] = [
     {
@@ -58,5 +58,43 @@ export const prioridades: PrioridadTicketTable[] = [
             color: "white",
             backgroundColor: "#730B8D",
         },
+    },
+]
+
+export interface EstadoTicketTable extends BaseTable {
+    name: "estado_ticket"
+    value: "abierto" | "resuelto" | "esperaagente" | "esperacliente" | "cerrado"
+}
+
+export const estados: EstadoTicketTable[] = [
+    {
+        id: 97,
+        name: "estado_ticket",
+        value: "abierto",
+        label: "Abierto",
+    },
+    {
+        id: 98,
+        name: "estado_ticket",
+        value: "resuelto",
+        label: "Resuelto",
+    },
+    {
+        id: 99,
+        name: "estado_ticket",
+        value: "esperaagente",
+        label: "Espera agente",
+    },
+    {
+        id: 100,
+        name: "estado_ticket",
+        value: "esperacliente",
+        label: "Espera Cliente",
+    },
+    {
+        id: 101,
+        name: "estado_ticket",
+        value: "esperacliente",
+        label: "Cerrado",
     },
 ]
