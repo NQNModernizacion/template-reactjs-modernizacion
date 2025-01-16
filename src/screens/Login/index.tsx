@@ -21,7 +21,10 @@ const Login = () => {
     const nav = useNavigate()
 
     const login = async (form: any) => {
-        const data = await postForm("internal_login", form, showSpinner)
+        form.method = "internal"
+        // form._id = 100815;
+        form._id = form.email
+        const data = await postForm("auth", form, showSpinner)
         if (data) {
             setStorage(data)
             ua.setStore(data)

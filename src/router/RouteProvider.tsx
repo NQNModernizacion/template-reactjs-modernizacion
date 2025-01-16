@@ -9,7 +9,7 @@ const RouteProvider = () => {
       <Routes>
         <Route element={<L.UserLayout />}>
           <Route path="/" element={<S.Menu />} />
-
+          <Route path="/componentes" element={<S.DevScreen />} />
           {/* Rutas comentadas para el administrador
           <Route element={<S.Management />} path="/administrador/roles-permisos" />
           <Route element={<S.ManagementRoles />} path="/administrador/roles-permisos/roles" />

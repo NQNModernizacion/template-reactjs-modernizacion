@@ -13,6 +13,7 @@ import {
     MuniSpinner,
     SelectSearch,
     Table,
+    SubirArchivo
 } from "../../components"
 
 import { prioridades } from "./exampleData"
@@ -23,6 +24,7 @@ const _DevScreen = () => {
     const [state, setState] = useState({
         showTable: false,
         hookForm: false,
+        subirArchivo: false,
     })
 
     const showToast = () => {
@@ -30,6 +32,14 @@ const _DevScreen = () => {
         toast.warning("warning", toastOptions)
         toast.error("error", toastOptions)
     }
+
+    const archivoSeleccionado = (file: File | null) => {
+        if (file) {
+          console.log("Archivo seleccionado:", file);
+        } else {
+          console.log("No hay archivo seleccionado");
+        }
+      };
 
     return (
         <BasicContainer>
@@ -52,6 +62,14 @@ const _DevScreen = () => {
                     }
                 >
                     Ejemplo Form Hook
+                </button>
+                <button
+                    className='btn btn-primary'
+                    onClick={() =>
+                        setState((state) => ({ ...state, subirArchivo: true }))
+                    }
+                >
+                    Subir Archivo
                 </button>
             </div>
             <hr />
@@ -116,6 +134,22 @@ const _DevScreen = () => {
                 }
             >
                 <HookForm onSubmit={console.log} />
+            </Modal>
+
+            <Modal
+                size='xl'
+                show={state.subirArchivo}
+                title={() => "Subir archivo ejemplo"}
+                onHide={() =>
+                    setState((state) => ({ ...state, subirArchivo: false }))
+                }
+            >
+                <SubirArchivo 
+                 label="Selecciona un archivo"
+                 accept=".png, .jpg, .pdf"
+                 onFileSelect={archivoSeleccionado}
+                
+                />
             </Modal>
         </BasicContainer>
     )
