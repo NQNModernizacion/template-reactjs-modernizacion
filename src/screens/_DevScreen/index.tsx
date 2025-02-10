@@ -13,7 +13,8 @@ import {
     MuniSpinner,
     SelectSearch,
     Table,
-    SubirArchivo
+    SubirArchivo,
+    SubirImagenes
 } from "../../components"
 
 import { prioridades } from "./exampleData"
@@ -25,6 +26,7 @@ const _DevScreen = () => {
         showTable: false,
         hookForm: false,
         subirArchivo: false,
+        subirImagenes: false,
     })
 
     const showToast = () => {
@@ -70,6 +72,14 @@ const _DevScreen = () => {
                     }
                 >
                     Subir Archivo
+                </button>
+                <button
+                    className='btn btn-primary'
+                    onClick={() =>
+                        setState((state) => ({ ...state, variosArchivos: true }))
+                    }
+                >
+                    Varios Archivo
                 </button>
             </div>
             <hr />
@@ -148,8 +158,23 @@ const _DevScreen = () => {
                  label="Selecciona un archivo"
                  accept=".png, .jpg, .pdf"
                  onFileSelect={archivoSeleccionado}
+                 onSave={() => console.log("Archivo guardado")}
                 
                 />
+
+               
+            </Modal>
+            <Modal
+                size='xl'
+                show={state.subirImagenes}
+                title={() => "Subir varios archivo ejemplo"}
+                onHide={() =>
+                    setState((state) => ({ ...state, subirImagenes: false }))
+                }
+            >
+            
+
+                <SubirImagenes/>
             </Modal>
         </BasicContainer>
     )
