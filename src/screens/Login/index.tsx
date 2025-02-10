@@ -26,9 +26,10 @@ const Login = () => {
         form._id = form.email
         const data = await postForm("auth", form, showSpinner)
         if (data) {
+            console.log(data)
             setStorage(data)
             ua.setStore(data)
-            nav(`/`)
+            nav('/')
         }
     }
 

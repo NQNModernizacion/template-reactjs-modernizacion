@@ -1,17 +1,27 @@
 import { useContext, useEffect } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
 
-import { logout } from "../../utils/localStorage"
+import { getStorage, logout } from "../../utils/localStorage"
 
 import { UserContext } from "../../context/UserWrapper"
+import { initApp } from "../../handlers"
 
 const UserLayout: React.FC = () => {
     const { actions: ua } = useContext(UserContext)
 
     const nav = useNavigate()
+    useEffect(() => {
+        initApp(ua)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
-        ua.user() && nav("/login")
+        const storedData = getStorage()
+        if (storedData && storedData.token) {
+            ua.setStore(storedData) // Sincroniza el store con los datos guardados
+        } else {
+            nav("/login") // Redirige si no hay token
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -19,7 +29,7 @@ const UserLayout: React.FC = () => {
 
     return (
         <>
-            <nav className='navbar d-flex  flex-wrap p-2 gap-1'>
+            <nav className='navbar d-flex justify-content-around flex-wrap gap-1'>
                 <img
                     alt='Logo Neuquén Capital'
                     height='80%'
@@ -27,31 +37,26 @@ const UserLayout: React.FC = () => {
                 />
 
                 {perfil && (
-                    <div className='d-flex align-items-center gap-sm-2 pe-3'>
-                        {/*  <img
-                            alt='imágen perfil'
-                            className='imagen-usuario-navbar'
-                            src={perfil.imagenUrl}
-                        /> */}
-                        <div className='vr d-none d-sm-block'></div>
-                        <div className='d-none d-sm-block text-start'>
-                            <small className='nombre-usuario-navbar'>
+                    <div className='d-flex align-items-center gap-3'>
+                       
+                        <div className='d-none d-md-block text-end'>
+                            <span className='fw-bold text-primary'>
                                 {perfil.nombre}
-                            </small>
+                            </span>
                             <br />
-                            <small className='email-usuario-navbar'>
+                            <small className='text-muted'>
                                 {perfil.correoElectronico}
                             </small>
                         </div>
-                        <div className='vr d-none d-sm-block'></div>
-                        <div
-                            className='ms-2 ms-sm-none text-primary'
-                            onClick={() => logout()}
-                            role='button'
+
+                        {/* Botón de logout */}
+                        <button
+                            className='btn btn-outline-primary btn-sm d-flex align-items-center'
+                            onClick={logout}
                         >
-                            <i className='fa-solid fa-arrow-right-from-bracket me-2'></i>
+                           
                             Salir
-                        </div>
+                        </button>
                     </div>
                 )}
             </nav>

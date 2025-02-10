@@ -15,7 +15,6 @@ const App = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    console.log(__DEV__)
 
     return (
         <RouteProvider/>
