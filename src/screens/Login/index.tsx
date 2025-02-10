@@ -23,7 +23,7 @@ const Login = () => {
     const login = async (form: any) => {
         form.method = "internal"
         // form._id = 100815;
-        form._id = form.email
+        // form._id = form.email
         const data = await postForm("auth", form, showSpinner)
         if (data) {
             console.log(data)
@@ -55,9 +55,9 @@ const Login = () => {
                             label: "form-label text-muted",
                             input: "form-control form-control shadow-sm",
                         }}
-                        invalidMsg={formState.errors.email?.message}
+                        invalidMsg={formState.errors._id?.message}
                         label={"Correo electronico / DNI *"}
-                        register={{ ...register("email") }}
+                        register={{ ...register("_id") }}
                         placeholder='usuario@gmail.com / 99.999.999'
                     />
                     <Input
