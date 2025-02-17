@@ -1,13 +1,15 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
 
 import { getStorage, logout } from "../../utils/localStorage"
 
 import { UserContext } from "../../context/UserWrapper"
 import { initApp } from "../../handlers"
+import { MuniSpinner } from "../../components"
 
 const UserLayout: React.FC = () => {
     const { actions: ua } = useContext(UserContext)
+    const [loading, setLoading] = useState(false);
 
     const nav = useNavigate()
     useEffect(() => {
@@ -38,7 +40,7 @@ const UserLayout: React.FC = () => {
 
                 {perfil && (
                     <div className='d-flex align-items-center gap-3'>
-                       
+
                         <div className='d-none d-md-block text-end'>
                             <span className='fw-bold text-primary'>
                                 {perfil.nombre}
@@ -52,10 +54,12 @@ const UserLayout: React.FC = () => {
                         {/* Botón de logout */}
                         <button
                             className='btn btn-outline-primary btn-sm d-flex align-items-center'
-                            onClick={logout}
+                            onClick={() => logout(setLoading)}
+                            disabled={loading}
                         >
-                           
-                            Salir
+
+                            {!loading && <span>Salir</span>}
+                            {loading && <MuniSpinner size={"20px"} circularProgressSize={22} />}
                         </button>
                     </div>
                 )}

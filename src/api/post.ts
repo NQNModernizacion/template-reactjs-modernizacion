@@ -8,10 +8,11 @@ export const postForm = async (
     path: string,
     form?: any,
     setLoading?: (b: boolean) => void | null,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig | null,
+    token?: string
 ) => {
     setLoading && setLoading(true)
-    const response = await axios().post(path, form, config)
+    const response = await axios(token).post(path, form, config)
     setLoading && setLoading(false)
 
     const { data, error } = response.data

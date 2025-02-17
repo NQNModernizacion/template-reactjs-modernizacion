@@ -2,7 +2,7 @@ import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 
 const dic = {
-    development: "apps/template",
+    development: "apps/template/",
     replica: "",
     production: "",
 }

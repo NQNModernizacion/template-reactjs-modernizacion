@@ -21,12 +21,11 @@ const Login = () => {
     const nav = useNavigate()
 
     const login = async (form: any) => {
-        form.method = "internal"
+        form.type = "internal"
         // form._id = 100815;
         // form._id = form.email
         const data = await postForm("auth", form, showSpinner)
         if (data) {
-            console.log(data)
             setStorage(data)
             ua.setStore(data)
             nav('/')

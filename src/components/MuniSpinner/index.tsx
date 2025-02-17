@@ -1,5 +1,6 @@
 import { CircularProgress } from "@mui/material"
 import { ASSETS_URL } from "../../config"
+import BOLA from "../../assets/bola.png"
 
 type RFC = React.FC<{
     size?: string | number
@@ -12,7 +13,7 @@ const MuniSpinner: RFC = ({
     size = 70,
     circularProgressSize = 100,
     textoSpinner = "",
-    file = "bola.png",
+    file = BOLA,
 }) => {
     return (
         <div className='d-flex align-items-center justify-content-center gap-4'>
@@ -23,7 +24,7 @@ const MuniSpinner: RFC = ({
                     className='color-primary'
                 />
                 <img
-                    src={ASSETS_URL + file}
+                    src={file}
                     alt='Municipalidad Spinner'
                     style={{ width: size, height: size, position: "absolute" }}
                 />
