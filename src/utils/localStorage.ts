@@ -18,7 +18,7 @@ export const viewSession = () => console.log(getStorage())
 
 export const logout = async (setLoading: any) => {
     setLoading(true);
-    await axios().post("logout", { token: getToken() })
+    await axios().post("logout")
     localStorage.removeItem(KEY)
     window.location.href = WEBLOGIN_URL
 }
