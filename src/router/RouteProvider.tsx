@@ -26,14 +26,14 @@ const RouteProvider = () => {
                         <Route path='/_viewcom' element={<S.DevScreen />} />
                     )}
                     <Route path='*' element={<NotFound />} />
-                
 
-                
-                <Route path='/login' element={<S.Login />} />
-                <Route path='/ejemplo' element={<S.PageExample />} />
+
+
+                    <Route path='/login' element={<S.Login />} />
+                    <Route path='/ejemplo' element={<S.PageExample />} />
                 </Route>
             </Routes>
-            
+
         </HashRouter>
     )
 }

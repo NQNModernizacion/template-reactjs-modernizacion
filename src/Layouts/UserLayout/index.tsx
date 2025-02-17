@@ -6,6 +6,7 @@ import { getStorage, logout } from "../../utils/localStorage"
 import { UserContext } from "../../context/UserWrapper"
 import { initApp } from "../../handlers"
 import { MuniSpinner } from "../../components"
+import TokenRefresher from "../../tokenRefresher/TokenRefresher"
 
 const UserLayout: React.FC = () => {
     const { actions: ua } = useContext(UserContext)
@@ -31,6 +32,7 @@ const UserLayout: React.FC = () => {
 
     return (
         <>
+            <TokenRefresher />
             <nav className='navbar d-flex justify-content-around flex-wrap gap-1'>
                 <img
                     alt='Logo Neuquén Capital'
